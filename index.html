@@ -3,97 +3,149 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data:; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'self' file: 'unsafe-inline'; img-src data:; base-uri 'none'; form-action 'none'">
 <meta name="robots" content="noindex">
 <title>Μαθαίνω Μαθηματικά</title>
 <style>
-:root { --navy:#14213D; --paper:#FAFAF7; --soft:#F0EFE9; --line:#D9D7CE; --muted:#4A5573; --accent:#F2B705; }
-* { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; }
-body { margin:0; background:var(--paper); color:var(--navy);
-  font-family:"Segoe UI","Helvetica Neue",Arial,system-ui,sans-serif; font-size:18px; line-height:1.5; }
-main { max-width:760px; margin:0 auto; padding:2rem 1.1rem 4rem; }
-.title { font-size:2.2rem; font-weight:700; line-height:1.2; margin:0; }
-.subtitle { font-size:1.15rem; color:var(--muted); margin:.2rem 0 0; }
-.rule { width:56px; height:4px; background:var(--accent); margin:.7rem 0 1.6rem; border:0; }
-h2 { font-size:1.5rem; margin:1.4rem 0 .6rem; }
+:root { --navy:#14213D; --ink2:#41507A; --paper:#FFFAEF; --card:#fff; --line:#E7DFC8; --soft:#F5EFDD;
+        --yellow:#FFC933; --mint:#CFEBC9; --peach:#FFD9BF; }
+* { box-sizing:border-box; }
+html { -webkit-text-size-adjust:100%; }
+body { margin:0; background:var(--paper); color:var(--navy); font-size:18px; line-height:1.5;
+  font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif; }
+main { max-width:860px; margin:0 auto; padding:1.1rem 1rem 4rem; }
+h1, h2, h3, p { margin-top:0; }
+h2 { font-size:1.6rem; line-height:1.25; margin-bottom:.4rem; }
 h3 { font-size:1.2rem; margin:1.6rem 0 .5rem; }
-p { margin:.4rem 0 .8rem; }
-.muted { color:var(--muted); font-size:.95rem; }
-label { display:block; font-weight:600; margin:1rem 0 .3rem; }
-input[type=text], select { width:100%; min-height:3rem; font:inherit; color:var(--navy); background:#fff;
-  border:1.5px solid var(--navy); border-radius:6px; padding:.5rem .7rem; }
-button, .btn { font:inherit; font-weight:600; min-height:3.3rem; width:100%; margin:.5rem 0; cursor:pointer;
-  border-radius:6px; border:1.5px solid var(--navy); background:#fff; color:var(--navy); padding:.5rem 1rem; }
-button.primary { background:var(--navy); color:#fff; }
-button:disabled { opacity:.45; cursor:not-allowed; }
-button:focus-visible, input:focus-visible, select:focus-visible, summary:focus-visible, .opt:focus-within {
-  outline:3px solid var(--accent); outline-offset:2px; }
-details { border:1.5px solid var(--line); border-radius:6px; padding:.2rem .9rem; margin:1rem 0; background:#fff; }
-summary { cursor:pointer; font-weight:600; padding:.6rem 0; }
-.seg { display:flex; gap:.5rem; margin:1.2rem 0 .4rem; }
-.seg button { margin:0; }
-.seg button[aria-pressed=true] { background:var(--navy); color:#fff; }
-hr.sep { border:0; border-top:1.5px solid var(--line); margin:1rem 0 1.4rem; }
-.counts { display:flex; gap:.5rem; flex-wrap:wrap; }
-.counts label { display:flex; align-items:center; gap:.5rem; margin:0; font-weight:600; border:1.5px solid var(--navy);
-  border-radius:6px; padding:.7rem 1.1rem; background:#fff; cursor:pointer; }
-.counts input { width:1.2rem; height:1.2rem; accent-color:var(--navy); }
-.prog { height:8px; background:var(--soft); border-radius:4px; overflow:hidden; margin:.3rem 0 1.2rem; }
-.prog > div { height:100%; background:var(--navy); }
-.prompt { font-size:1.55rem; line-height:1.45; font-weight:600; margin:.4rem 0 1.1rem; }
+.muted { color:var(--ink2); font-size:.95rem; }
+.sr { position:absolute; left:-9999px; }
+
+/* Κεφαλίδα */
+.top { display:flex; align-items:center; justify-content:space-between; gap:.8rem; margin-bottom:1rem; flex-wrap:wrap; }
+.brand { display:flex; align-items:center; gap:.8rem; min-width:0; flex:1 1 14rem; }
+.logo { flex:none; width:58px; height:58px; }
+.title { font-size:2rem; font-weight:800; line-height:1.12; margin:0; }
+.title::after { content:""; display:block; width:54px; height:5px; border-radius:3px; background:var(--yellow); margin-top:.35rem; }
+.subtitle { margin:.35rem 0 0; color:var(--ink2); font-size:1.05rem; }
+
+/* Κουμπιά */
+.btn { font:inherit; font-weight:700; min-height:3.2rem; padding:.55rem 1.2rem; border-radius:14px; border:2px solid var(--navy);
+  background:#fff; color:var(--navy); cursor:pointer; box-shadow:0 4px 0 var(--navy); transition:transform .08s, box-shadow .08s; }
+.btn:active { transform:translateY(3px); box-shadow:0 1px 0 var(--navy); }
+.btn.primary { background:var(--yellow); }
+.btn.block { display:block; width:100%; margin:.55rem 0 .8rem; }
+.btn:disabled { opacity:.45; cursor:not-allowed; box-shadow:none; transform:none; }
+.btn.small { white-space:nowrap; min-height:2.6rem; padding:.3rem .9rem; font-size:.95rem; box-shadow:0 3px 0 var(--navy); }
+.btn.link { border-color:transparent; background:transparent; box-shadow:none; text-decoration:underline; min-height:2.6rem; padding:.3rem .6rem; }
+.btn:focus-visible, input:focus-visible, summary:focus-visible, a:focus-visible { outline:3px solid var(--navy); outline-offset:3px; }
+@media (prefers-reduced-motion:reduce) { .btn { transition:none; } }
+
+/* Προφίλ */
+.chips { display:flex; flex-wrap:wrap; gap:.6rem; margin:.4rem 0 1rem; }
+.chip { font:inherit; font-weight:700; min-height:2.9rem; padding:.3rem 1.1rem; border-radius:999px; border:2px solid var(--navy);
+  background:#fff; color:var(--navy); cursor:pointer; }
+.chip[aria-pressed=true] { background:var(--navy); color:#fff; }
+.chip.add { border-style:dashed; }
+.chip:focus-visible { outline:3px solid var(--navy); outline-offset:3px; }
+.panel { background:#fff; border:2px solid var(--navy); border-radius:20px; padding:1rem 1.2rem 1.1rem; margin:.8rem 0 1.2rem; }
+label.lbl { display:block; font-weight:700; margin:.4rem 0 .3rem; }
+input[type=text] { width:100%; min-height:3.1rem; font:inherit; color:var(--navy); background:#fff; border:2px solid var(--navy);
+  border-radius:12px; padding:.4rem .8rem; }
+
+/* Αρχική: κάρτες ενοτήτων */
+.pill { display:inline-block; font-size:.9rem; font-weight:700; background:var(--soft); border:1.5px solid var(--navy);
+  border-radius:999px; padding:.05rem .8rem; }
+.grid { display:grid; grid-template-columns:1fr; gap:1.1rem; margin:1rem 0; }
+@media (min-width:640px) { .grid { grid-template-columns:1fr 1fr; } }
+.card { background:var(--card); border:2px solid var(--navy); border-radius:20px; padding:1.2rem 1.1rem 1.1rem; box-shadow:0 5px 0 var(--navy);
+  position:relative; overflow:hidden; }
+.card::before { content:""; position:absolute; left:0; right:0; top:0; height:11px; background:var(--tint); border-bottom:2px solid var(--navy); }
+.card-head { display:flex; gap:.9rem; align-items:center; margin-top:.5rem; }
+.badge { flex:none; width:3.5rem; height:3.5rem; border-radius:50%; background:var(--tint); border:2px solid var(--navy);
+  display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1.45rem; }
+.card h3 { margin:0; font-size:1.2rem; line-height:1.25; }
+.card p { margin:0; }
+.card-actions { display:grid; grid-template-columns:1fr 1fr; gap:.7rem; margin-top:1rem; }
+.card-actions .btn { width:100%; padding-left:.3rem; padding-right:.3rem; }
+.tags { display:flex; flex-wrap:wrap; gap:.4rem; margin-top:.9rem; }
+.tag { font-size:.88rem; font-weight:700; background:var(--soft); border-radius:999px; padding:.1rem .75rem; }
+
+/* Ερωτήσεις */
+.runbar { display:flex; align-items:center; justify-content:space-between; gap:.6rem; margin-bottom:.4rem; }
+.dots { display:flex; gap:.35rem; list-style:none; padding:0; margin:.5rem 0 .8rem; }
+.dots li { flex:1; height:.7rem; border-radius:999px; background:var(--line); border:1.5px solid transparent; }
+.dots li.done { background:var(--navy); }
+.dots li.now { background:var(--yellow); border-color:var(--navy); }
+.qcount { font-weight:700; color:var(--ink2); }
+.prompt { font-size:1.6rem; line-height:1.4; font-weight:700; margin:.3rem 0 .8rem; }
 fieldset { border:0; padding:0; margin:0; min-width:0; }
-legend { font-weight:600; margin:1rem 0 .3rem; padding:0; }
-.opt { display:flex; align-items:center; gap:.8rem; border:1.5px solid var(--navy); border-radius:6px; background:#fff;
-  padding:.85rem 1rem; margin:.5rem 0; font-size:1.25rem; cursor:pointer; }
-.opt input { width:1.3rem; height:1.3rem; accent-color:var(--navy); flex:none; }
-.opt.selected { background:var(--soft); }
+.opt { position:relative; display:flex; align-items:center; gap:.9rem; background:#fff; border:2px solid var(--navy); border-radius:16px;
+  padding:.8rem 1rem; margin:.75rem 0; font-size:1.3rem; font-weight:600; cursor:pointer; box-shadow:0 3px 0 var(--navy); }
+.opt input { position:absolute; opacity:0; pointer-events:none; }
+.opt .let { flex:none; width:2.4rem; height:2.4rem; border-radius:50%; border:2px solid var(--navy); display:flex; align-items:center;
+  justify-content:center; font-weight:800; background:var(--paper); font-size:1.1rem; }
+.opt .note { margin-left:auto; font-size:.85rem; font-weight:700; text-align:right; padding-left:.5rem; }
+.opt.selected { background:#FFF1BD; }
+.opt.selected .let { background:var(--yellow); }
+.opt.right { background:var(--mint); }
+.opt.wrong { background:var(--peach); }
 .opt.locked { cursor:default; }
-.feedback { border-left:4px solid var(--navy); background:var(--soft); padding:.9rem 1.1rem; margin:1rem 0 1.2rem; font-size:1.1rem; }
-.feedback .verdict { font-weight:700; margin-bottom:.3rem; }
-.metrics { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:1rem; margin:1rem 0; }
-.metric { border:1.5px solid var(--line); background:#fff; border-radius:6px; padding:.8rem 1rem; }
-.metric .k { font-size:.95rem; color:var(--muted); }
-.metric .v { font-size:1.9rem; font-weight:700; }
+.opt:focus-within { outline:3px solid var(--navy); outline-offset:3px; }
+.feedback { border:2px solid var(--navy); border-radius:16px; padding:.9rem 1.1rem; margin:1.1rem 0 .6rem; background:var(--soft); }
+.feedback.good { background:var(--mint); }
+.feedback.bad { background:var(--peach); }
+.feedback .verdict { font-weight:800; font-size:1.3rem; margin-bottom:.2rem; }
+
+/* Αποτέλεσμα */
+.bigscore { font-size:3.2rem; font-weight:800; line-height:1.1; margin:.2rem 0; }
+.meter { display:flex; flex-wrap:wrap; gap:.4rem; margin:.6rem 0 1rem; }
+.meter span { width:1.6rem; height:1.6rem; border-radius:50%; border:2px solid var(--navy); background:#fff; }
+.meter span.on { background:var(--yellow); }
+.review { list-style:none; padding:0; margin:.5rem 0; }
+.review li { background:#fff; border:2px solid var(--line); border-radius:14px; padding:.7rem .9rem; margin:.6rem 0; }
+.review .q { font-weight:700; }
+details { background:#fff; border:2px solid var(--navy); border-radius:16px; padding:.2rem 1rem; margin:1rem 0; }
+summary { cursor:pointer; font-weight:700; padding:.65rem 0; }
+
+/* Γονέας */
+.metrics { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:.9rem; margin:1rem 0; }
+.metric { border:2px solid var(--navy); background:#fff; border-radius:16px; padding:.7rem 1rem; }
+.metric .k { font-size:.92rem; color:var(--ink2); }
+.metric .v { font-size:1.9rem; font-weight:800; }
 table { width:100%; border-collapse:collapse; background:#fff; font-size:1rem; }
 th, td { text-align:left; padding:.55rem .6rem; border-bottom:1px solid var(--line); vertical-align:middle; }
-th { background:var(--soft); font-weight:600; }
-.tablewrap { overflow-x:auto; border:1.5px solid var(--line); border-radius:6px; }
-.bar { display:inline-block; vertical-align:middle; width:90px; height:10px; background:var(--soft); border-radius:5px; overflow:hidden; margin-right:.5rem; }
-.bar > i { display:block; height:100%; background:var(--navy); }
+th { background:var(--soft); font-weight:700; }
+.tablewrap { overflow-x:auto; border:2px solid var(--navy); border-radius:14px; }
 .chart { display:flex; align-items:flex-end; gap:.5rem; height:170px; padding:.5rem .3rem 0; border-bottom:2px solid var(--navy); margin:.6rem 0 0; }
 .chart .col { flex:1; display:flex; flex-direction:column; justify-content:flex-end; align-items:center; height:100%; min-width:0; }
 .chart .col span { font-size:.8rem; }
-.chart .col div { width:70%; max-width:42px; background:var(--navy); border-radius:3px 3px 0 0; min-height:2px; }
-.chartlabels { display:flex; gap:.5rem; padding:0 .3rem; font-size:.8rem; color:var(--muted); }
+.chart .col div { width:70%; max-width:42px; background:var(--navy); border-radius:4px 4px 0 0; min-height:2px; }
+.chartlabels { display:flex; gap:.5rem; padding:0 .3rem; font-size:.8rem; color:var(--ink2); }
 .chartlabels span { flex:1; text-align:center; }
-.banner { border-left:4px solid var(--accent); background:#fff; padding:.7rem 1rem; margin:.8rem 0; border-top:1px solid var(--line); border-right:1px solid var(--line); border-bottom:1px solid var(--line); }
-.banner.error { border-left-color:var(--navy); }
-.sr { position:absolute; left:-9999px; }
-.check-row { display:flex; align-items:center; gap:.6rem; margin:.8rem 0; font-weight:600; }
+.banner { border:2px solid var(--navy); border-left-width:8px; background:#fff; border-radius:12px; padding:.7rem 1rem; margin:.8rem 0; }
+.banner.error { border-left-color:#C2410C; }
+.banner ul { margin:.4rem 0 0; padding-left:1.2rem; }
+.check-row { display:flex; align-items:center; gap:.6rem; margin:.8rem 0; font-weight:700; }
 .check-row input { width:1.3rem; height:1.3rem; accent-color:var(--navy); }
-.check-row label { margin:0; }
-@media (max-width:640px) { .bar { display:none; } th, td { padding:.5rem .3rem; font-size:.95rem; } th { font-size:.88rem; } .title { font-size:1.8rem; } .prompt { font-size:1.35rem; } body { font-size:17px; } }
+@media (max-width:640px) { .bar { display:none; } .title { font-size:1.65rem; } .prompt { font-size:1.4rem; } .opt { font-size:1.2rem; }
+  .logo { width:46px; height:46px; } th, td { padding:.5rem .35rem; font-size:.95rem; } th { font-size:.88rem; } .bigscore { font-size:2.7rem; } }
+.bar { display:inline-block; vertical-align:middle; width:90px; height:10px; background:var(--soft); border-radius:5px; overflow:hidden; margin-right:.5rem; }
+.bar > i { display:block; height:100%; background:var(--navy); }
 @media (max-width:380px) { th, td { font-size:.8rem; padding:.45rem .2rem; } th { font-size:.75rem; } main { padding-left:.8rem; padding-right:.8rem; } }
 </style>
 </head>
 <body>
 <main id="app"><noscript><p>Η εφαρμογή χρειάζεται JavaScript για να λειτουργήσει.</p></noscript></main>
-<script type="application/json" id="qdata">{"sections":[{"code":"addsub","title":"Πρόσθεση και αφαίρεση"},{"code":"mult","title":"Πολλαπλασιασμός"},{"code":"div","title":"Διαίρεση"},{"code":"problems","title":"Προβλήματα καθημερινής ζωής"},{"code":"geometry","title":"Γεωμετρία"},{"code":"measures","title":"Μετρήσεις και μονάδες"}],"questions":[{"code":"addsub-01","section":"addsub","grade":3,"prompt":"Πόσο κάνει 456 + 237;","options":["693","683","793","703"],"correct":0,"explanation":"Μονάδες: 6 + 7 = 13, γράφω 3 και κρατάω 1. Δεκάδες: 5 + 3 + 1 = 9. Εκατοντάδες: 4 + 2 = 6. Άρα 693.","difficulty":1},{"code":"addsub-02","section":"addsub","grade":3,"prompt":"Πόσο κάνει 802 − 359;","options":["443","453","557","543"],"correct":0,"explanation":"Ελέγχουμε με πρόσθεση: 359 + 443 = 802. Άρα 802 − 359 = 443.","difficulty":2},{"code":"addsub-03","section":"addsub","grade":3,"prompt":"Πόσο κάνει 1.250 + 1.380;","options":["2.630","2.530","2.620","2.730"],"correct":0,"explanation":"Προσθέτουμε χιλιάδες: 1 + 1 = 2. Μετά 250 + 380 = 630. Άρα 2.630.","difficulty":2},{"code":"addsub-04","section":"addsub","grade":3,"prompt":"Πόσο κάνει 5.000 − 1.800;","options":["3.200","3.800","4.200","3.300"],"correct":0,"explanation":"Από το 5.000 αφαιρούμε πρώτα 1.000 και μένουν 4.000. Μετά αφαιρούμε 800 και μένουν 3.200.","difficulty":2},{"code":"addsub-05","section":"addsub","grade":3,"prompt":"Ποιος αριθμός λείπει; 275 + __ = 500","options":["225","235","325","215"],"correct":0,"explanation":"Για να βρούμε τον αριθμό που λείπει, αφαιρούμε: 500 − 275 = 225.","difficulty":2},{"code":"addsub-06","section":"addsub","grade":3,"prompt":"Πόσο κάνει 3.406 + 2.595;","options":["6.001","5.901","6.011","5.991"],"correct":0,"explanation":"Μονάδες: 6 + 5 = 11, γράφω 1 και κρατάω 1. Δεκάδες: 0 + 9 + 1 = 10, γράφω 0 και κρατάω 1. Εκατοντάδες: 4 + 5 + 1 = 10, γράφω 0 και κρατάω 1. Χιλιάδες: 3 + 2 + 1 = 6. Άρα 6.001.","difficulty":3},{"code":"addsub-07","section":"addsub","grade":3,"prompt":"Πόσο κάνει 1.000 − 487;","options":["513","523","613","413"],"correct":0,"explanation":"Ελέγχουμε με πρόσθεση: 487 + 513 = 1.000. Άρα το αποτέλεσμα είναι 513.","difficulty":2},{"code":"addsub-08","section":"addsub","grade":3,"prompt":"Πόσο κάνει 90 + 70 − 60;","options":["100","120","160","80"],"correct":0,"explanation":"Κάνουμε τις πράξεις από αριστερά προς τα δεξιά: 90 + 70 = 160 και μετά 160 − 60 = 100.","difficulty":1},{"code":"addsub-09","section":"addsub","grade":3,"prompt":"Πόσο κάνει 648 + 99;","options":["747","737","757","749"],"correct":0,"explanation":"Το 99 είναι κοντά στο 100. Κάνουμε 648 + 100 = 748 και αφαιρούμε 1. Βγαίνει 747.","difficulty":2},{"code":"addsub-10","section":"addsub","grade":3,"prompt":"Ποια πράξη έχει αποτέλεσμα 350;","options":["200 + 150","400 − 100","180 + 160","500 − 250"],"correct":0,"explanation":"200 + 150 = 350. Οι άλλες δίνουν 300, 340 και 250.","difficulty":1},{"code":"mult-01","section":"mult","grade":3,"prompt":"Πόσο κάνει 6 × 7;","options":["42","36","48","49"],"correct":0,"explanation":"Η προπαίδεια του 6: 6, 12, 18, 24, 30, 36, 42. Το έβδομο βήμα είναι 42.","difficulty":1},{"code":"mult-02","section":"mult","grade":3,"prompt":"Πόσο κάνει 8 × 9;","options":["72","63","81","64"],"correct":0,"explanation":"Μπορούμε να σκεφτούμε 8 × 10 = 80 και να αφαιρέσουμε ένα 8: 80 − 8 = 72.","difficulty":1},{"code":"mult-03","section":"mult","grade":3,"prompt":"Πόσο κάνει 4 × 25;","options":["100","80","120","90"],"correct":0,"explanation":"Τέσσερα εικοσιπεντάρια κάνουν 25 + 25 + 25 + 25 = 100.","difficulty":2},{"code":"mult-04","section":"mult","grade":3,"prompt":"Πόσο κάνει 30 × 4;","options":["120","12","1.200","34"],"correct":0,"explanation":"3 δεκάδες × 4 = 12 δεκάδες, δηλαδή 120.","difficulty":1},{"code":"mult-05","section":"mult","grade":3,"prompt":"Πόσο κάνει 12 × 5;","options":["60","70","55","17"],"correct":0,"explanation":"12 × 5 = 10 × 5 + 2 × 5 = 50 + 10 = 60.","difficulty":2},{"code":"mult-06","section":"mult","grade":3,"prompt":"Πόσο κάνει 23 × 3;","options":["69","66","59","79"],"correct":0,"explanation":"23 × 3 = 20 × 3 + 3 × 3 = 60 + 9 = 69.","difficulty":2},{"code":"mult-07","section":"mult","grade":3,"prompt":"Ποιος αριθμός λείπει; 7 × __ = 56","options":["8","6","7","9"],"correct":0,"explanation":"Στην προπαίδεια του 7: 7, 14, 21, 28, 35, 42, 49, 56. Το 56 είναι το όγδοο βήμα.","difficulty":1},{"code":"mult-08","section":"mult","grade":3,"prompt":"Πόσο κάνει 15 × 4;","options":["60","54","64","19"],"correct":0,"explanation":"15 × 4 = 10 × 4 + 5 × 4 = 40 + 20 = 60.","difficulty":2},{"code":"mult-09","section":"mult","grade":3,"prompt":"Πόσο κάνει 9 × 0;","options":["0","9","1","90"],"correct":0,"explanation":"Όταν πολλαπλασιάζουμε έναν αριθμό με το 0, το αποτέλεσμα είναι πάντα 0.","difficulty":1},{"code":"mult-10","section":"mult","grade":3,"prompt":"Πόσο κάνει 14 × 6;","options":["84","74","80","94"],"correct":0,"explanation":"14 × 6 = 10 × 6 + 4 × 6 = 60 + 24 = 84.","difficulty":3},{"code":"div-01","section":"div","grade":3,"prompt":"Πόσο κάνει 42 : 6;","options":["7","6","8","9"],"correct":0,"explanation":"Ψάχνουμε ποιος αριθμός επί 6 κάνει 42. Είναι το 7, γιατί 6 × 7 = 42.","difficulty":1},{"code":"div-02","section":"div","grade":3,"prompt":"Πόσο κάνει 56 : 8;","options":["7","8","6","9"],"correct":0,"explanation":"Επειδή 8 × 7 = 56, έχουμε 56 : 8 = 7.","difficulty":1},{"code":"div-03","section":"div","grade":3,"prompt":"Πόσο κάνει 90 : 10;","options":["9","10","80","900"],"correct":0,"explanation":"Όταν διαιρούμε με το 10, κόβουμε το μηδενικό στο τέλος: 90 : 10 = 9.","difficulty":1},{"code":"div-04","section":"div","grade":3,"prompt":"Πόσο κάνει 75 : 5;","options":["15","14","25","10"],"correct":0,"explanation":"Επειδή 5 × 15 = 75, έχουμε 75 : 5 = 15.","difficulty":2},{"code":"div-05","section":"div","grade":3,"prompt":"Πόσο κάνει 81 : 9;","options":["9","8","7","10"],"correct":0,"explanation":"Επειδή 9 × 9 = 81, έχουμε 81 : 9 = 9.","difficulty":1},{"code":"div-06","section":"div","grade":3,"prompt":"Ποιος αριθμός λείπει; __ : 4 = 8","options":["32","12","24","36"],"correct":0,"explanation":"Αν ο αριθμός διαιρεθεί με το 4 και δώσει 8, τότε είναι 8 × 4 = 32.","difficulty":2},{"code":"div-07","section":"div","grade":3,"prompt":"Πόσο κάνει 100 : 4;","options":["25","20","40","50"],"correct":0,"explanation":"Επειδή 4 × 25 = 100, έχουμε 100 : 4 = 25.","difficulty":2},{"code":"div-08","section":"div","grade":3,"prompt":"Πόσο κάνει 48 : 6;","options":["8","6","7","9"],"correct":0,"explanation":"Επειδή 6 × 8 = 48, έχουμε 48 : 6 = 8.","difficulty":1},{"code":"div-09","section":"div","grade":3,"prompt":"Στη διαίρεση 17 : 5, ποιο είναι το υπόλοιπο;","options":["2","3","5","0"],"correct":0,"explanation":"Το 5 χωράει 3 φορές στο 17, γιατί 5 × 3 = 15. Μένουν 17 − 15 = 2. Το υπόλοιπο είναι 2.","difficulty":3},{"code":"div-10","section":"div","grade":3,"prompt":"Ποια πράξη μας βοηθά να ελέγξουμε το 7 × 4 = 28;","options":["28 : 4 = 7","28 − 7 = 21","7 + 4 = 11","28 + 4 = 32"],"correct":0,"explanation":"Η διαίρεση είναι η αντίστροφη πράξη του πολλαπλασιασμού. Από το 7 × 4 = 28 βγαίνει 28 : 4 = 7.","difficulty":2},{"code":"problems-01","section":"problems","grade":3,"prompt":"Η Μαρία έχει 25 αυτοκόλλητα και παίρνει άλλα 18. Πόσα αυτοκόλλητα έχει τώρα;","options":["43","33","7","53"],"correct":0,"explanation":"Έχει και παίρνει ακόμα, άρα προσθέτουμε: 25 + 18 = 43.","difficulty":1},{"code":"problems-02","section":"problems","grade":3,"prompt":"Ένα κουτί έχει 6 μπισκότα. Πόσα μπισκότα έχουν 7 τέτοια κουτιά;","options":["42","13","36","48"],"correct":0,"explanation":"Έχουμε 7 ίσες ομάδες των 6, άρα πολλαπλασιάζουμε: 7 × 6 = 42.","difficulty":1},{"code":"problems-03","section":"problems","grade":3,"prompt":"Ο κύριος Πέτρος μοίρασε 24 μήλα σε 4 καλάθια, με ίσο αριθμό μήλων στο καθένα. Πόσα μήλα μπήκαν σε κάθε καλάθι;","options":["6","20","28","8"],"correct":0,"explanation":"Μοιράζουμε σε ίσα μέρη, άρα διαιρούμε: 24 : 4 = 6.","difficulty":1},{"code":"problems-04","section":"problems","grade":3,"prompt":"Ο Νίκος έχει 20 € και αγοράζει ένα βιβλίο που κοστίζει 13 €. Πόσα ευρώ του μένουν;","options":["7","33","13","17"],"correct":0,"explanation":"Ξοδεύει χρήματα, άρα αφαιρούμε: 20 − 13 = 7.","difficulty":1},{"code":"problems-05","section":"problems","grade":3,"prompt":"Ένα εισιτήριο για το θέατρο κοστίζει 3 €. Πόσο κοστίζουν 5 εισιτήρια;","options":["15 €","8 €","12 €","18 €"],"correct":0,"explanation":"Πέντε φορές το ίδιο ποσό: 5 × 3 = 15 ευρώ.","difficulty":1},{"code":"problems-06","section":"problems","grade":3,"prompt":"Ο παππούς φύτεψε 8 σειρές με 9 δέντρα η καθεμία. Πόσα δέντρα φύτεψε;","options":["72","17","64","81"],"correct":0,"explanation":"8 σειρές × 9 δέντρα = 72 δέντρα.","difficulty":2},{"code":"problems-07","section":"problems","grade":3,"prompt":"Η Ελένη αγόρασε 3 τετράδια των 2 € το καθένα και ένα μολύβι για 1 €. Πόσα ευρώ πλήρωσε συνολικά;","options":["7 €","6 €","5 €","9 €"],"correct":0,"explanation":"Πρώτα τα τετράδια: 3 × 2 = 6 €. Μετά προσθέτουμε το μολύβι: 6 + 1 = 7 €.","difficulty":2},{"code":"problems-08","section":"problems","grade":3,"prompt":"Σε μια εκδρομή πήγαν 30 παιδιά. Φτιάχτηκαν ομάδες των 5 παιδιών. Πόσες ομάδες φτιάχτηκαν;","options":["6","25","35","5"],"correct":0,"explanation":"Βάζουμε 5 παιδιά σε κάθε ομάδα, άρα διαιρούμε: 30 : 5 = 6.","difficulty":1},{"code":"problems-09","section":"problems","grade":3,"prompt":"Ο Γιάννης διαβάζει 15 σελίδες κάθε μέρα. Πόσες σελίδες διαβάζει σε 4 μέρες;","options":["60","19","45","54"],"correct":0,"explanation":"4 × 15 = 4 × 10 + 4 × 5 = 40 + 20 = 60 σελίδες.","difficulty":2},{"code":"problems-10","section":"problems","grade":3,"prompt":"Στο λεωφορείο ήταν 32 επιβάτες. Στη στάση κατέβηκαν 9 και ανέβηκαν 14. Πόσοι επιβάτες είναι τώρα στο λεωφορείο;","options":["37","27","41","55"],"correct":0,"explanation":"Πρώτα κατεβαίνουν 9: 32 − 9 = 23. Μετά ανεβαίνουν 14: 23 + 14 = 37.","difficulty":3},{"code":"problems-11","section":"problems","grade":3,"prompt":"Ένα βιβλίο έχει 120 σελίδες. Η Άννα έχει διαβάσει τις 75. Πόσες σελίδες της μένουν;","options":["45","55","195","35"],"correct":0,"explanation":"Αφαιρούμε όσες έχει διαβάσει: 120 − 75 = 45 σελίδες.","difficulty":2},{"code":"geometry-01","section":"geometry","grade":3,"prompt":"Πόσες πλευρές έχει ένα τρίγωνο;","options":["3","4","5","6"],"correct":0,"explanation":"Το τρίγωνο έχει 3 πλευρές και 3 κορυφές.","difficulty":1},{"code":"geometry-02","section":"geometry","grade":3,"prompt":"Πόσες κορυφές έχει ένα ορθογώνιο;","options":["4","2","3","5"],"correct":0,"explanation":"Το ορθογώνιο έχει 4 πλευρές και 4 κορυφές.","difficulty":1},{"code":"geometry-03","section":"geometry","grade":3,"prompt":"Ποιο από τα παρακάτω σχήματα έχει 4 ίσες πλευρές;","options":["Τετράγωνο","Τρίγωνο","Κύκλος","Πεντάγωνο"],"correct":0,"explanation":"Το τετράγωνο έχει 4 πλευρές με το ίδιο μήκος.","difficulty":1},{"code":"geometry-04","section":"geometry","grade":3,"prompt":"Ένα τετράγωνο έχει πλευρά 5 εκατοστά. Ποια είναι η περίμετρός του;","options":["20 εκ.","10 εκ.","25 εκ.","15 εκ."],"correct":0,"explanation":"Περίμετρος είναι το άθροισμα όλων των πλευρών: 5 + 5 + 5 + 5 = 20 εκ.","difficulty":2},{"code":"geometry-05","section":"geometry","grade":3,"prompt":"Ένα ορθογώνιο έχει μήκος 8 εκατοστά και πλάτος 3 εκατοστά. Ποια είναι η περίμετρός του;","options":["22 εκ.","11 εκ.","24 εκ.","14 εκ."],"correct":0,"explanation":"Προσθέτουμε και τις 4 πλευρές: 8 + 3 + 8 + 3 = 22 εκ.","difficulty":2},{"code":"geometry-06","section":"geometry","grade":3,"prompt":"Πόσες πλευρές έχει ένα εξάγωνο;","options":["6","5","7","8"],"correct":0,"explanation":"Η λέξη εξάγωνο δείχνει έξι γωνίες, άρα και έξι πλευρές.","difficulty":1},{"code":"geometry-07","section":"geometry","grade":3,"prompt":"Η γωνία στην κορυφή ενός τετραγώνου λέγεται:","options":["ορθή","οξεία","αμβλεία","ευθεία"],"correct":0,"explanation":"Οι γωνίες του τετραγώνου είναι ορθές, όπως η γωνία στη γωνιά ενός φύλλου χαρτιού.","difficulty":2},{"code":"geometry-08","section":"geometry","grade":3,"prompt":"Ποιο στερεό μοιάζει με ένα ζάρι;","options":["Κύβος","Σφαίρα","Κύλινδρος","Κώνος"],"correct":0,"explanation":"Το ζάρι έχει έδρες που είναι ίσα τετράγωνα. Αυτό το στερεό λέγεται κύβος.","difficulty":1},{"code":"geometry-09","section":"geometry","grade":3,"prompt":"Πόσες έδρες έχει ένας κύβος;","options":["6","4","8","12"],"correct":0,"explanation":"Ο κύβος έχει 6 έδρες: πάνω, κάτω, μπροστά, πίσω, δεξιά και αριστερά.","difficulty":2},{"code":"geometry-10","section":"geometry","grade":3,"prompt":"Ποιο από τα παρακάτω σχήματα δεν έχει καθόλου γωνίες;","options":["Κύκλος","Τετράγωνο","Τρίγωνο","Ορθογώνιο"],"correct":0,"explanation":"Ο κύκλος έχει καμπύλη γραμμή, χωρίς κορυφές και χωρίς γωνίες.","difficulty":1},{"code":"measures-01","section":"measures","grade":3,"prompt":"Πόσα εκατοστά έχει 1 μέτρο;","options":["100","10","1.000","50"],"correct":0,"explanation":"1 μέτρο = 100 εκατοστά.","difficulty":1},{"code":"measures-02","section":"measures","grade":3,"prompt":"Πόσα μέτρα έχει 1 χιλιόμετρο;","options":["1.000","100","10","10.000"],"correct":0,"explanation":"Το «χίλια» στη λέξη χιλιόμετρο μας θυμίζει ότι 1 χιλιόμετρο = 1.000 μέτρα.","difficulty":1},{"code":"measures-03","section":"measures","grade":3,"prompt":"Πόσα γραμμάρια έχει 1 κιλό;","options":["1.000","100","500","10"],"correct":0,"explanation":"1 κιλό = 1.000 γραμμάρια.","difficulty":1},{"code":"measures-04","section":"measures","grade":3,"prompt":"Πόσα λεπτά έχει 1 ώρα;","options":["60","30","100","12"],"correct":0,"explanation":"1 ώρα = 60 λεπτά.","difficulty":1},{"code":"measures-05","section":"measures","grade":3,"prompt":"Πόσα λεπτά είναι μιάμιση ώρα;","options":["90","60","80","100"],"correct":0,"explanation":"Μία ώρα έχει 60 λεπτά και η μισή ώρα 30. Άρα 60 + 30 = 90 λεπτά.","difficulty":2},{"code":"measures-06","section":"measures","grade":3,"prompt":"Ένα παιχνίδι αρχίζει στις 3:15 και διαρκεί 30 λεπτά. Τι ώρα τελειώνει;","options":["3:45","4:15","3:30","3:55"],"correct":0,"explanation":"Από τις 3:15 περνούν 30 λεπτά (μισή ώρα) και η ώρα γίνεται 3:45.","difficulty":2},{"code":"measures-07","section":"measures","grade":3,"prompt":"Ποια μονάδα ταιριάζει για να μετρήσουμε το μήκος ενός δωματίου;","options":["μέτρα","γραμμάρια","λίτρα","λεπτά"],"correct":0,"explanation":"Το μήκος μετριέται με μονάδες μήκους, όπως τα μέτρα.","difficulty":1},{"code":"measures-08","section":"measures","grade":3,"prompt":"Ποια μονάδα ταιριάζει για να μετρήσουμε το βάρος ενός καρπουζιού;","options":["κιλά","εκατοστά","λίτρα","ώρες"],"correct":0,"explanation":"Το βάρος μετριέται σε γραμμάρια ή κιλά. Ένα καρπούζι είναι βαρύ, άρα κιλά.","difficulty":1},{"code":"measures-09","section":"measures","grade":3,"prompt":"Πόσα λεπτά του ευρώ (σεντς) έχει 1 ευρώ;","options":["100","10","50","1.000"],"correct":0,"explanation":"1 ευρώ = 100 λεπτά.","difficulty":1},{"code":"measures-10","section":"measures","grade":3,"prompt":"Η Κατερίνα πληρώνει με 5 € ένα παγωτό που κοστίζει 2,50 €. Πόσα ρέστα παίρνει;","options":["2,50 €","3 €","2 €","3,50 €"],"correct":0,"explanation":"5 € − 2,50 € = 2,50 €. Από το 2,50 € ως το 5 € λείπουν άλλα 2,50 €.","difficulty":3},{"code":"measures-11","section":"measures","grade":3,"prompt":"Ποιο είναι μεγαλύτερο μήκος: 2 μέτρα ή 150 εκατοστά;","options":["2 μέτρα","150 εκατοστά","Είναι ίσα","Δεν μπορούμε να ξέρουμε"],"correct":0,"explanation":"2 μέτρα = 200 εκατοστά, που είναι περισσότερα από 150 εκατοστά.","difficulty":2}]}</script>
+<script src="questions.js"></script>
 <script>
 "use strict";
 (function () {
   // ------------------------------------------------------------------
-  // Δεδομένα (ερωτήσεις ενσωματωμένες στο αρχείο)
+  // Σταθερές
   // ------------------------------------------------------------------
-  var DATA = JSON.parse(document.getElementById("qdata").textContent);
-  var SECTIONS = DATA.sections;           // [{code,title}]
-  var QUESTIONS = DATA.questions;         // [{code,section,grade,prompt,options,correct,explanation,difficulty}]
-  var GRADES = { 1:"Α΄ Δημοτικού", 2:"Β΄ Δημοτικού", 3:"Γ΄ Δημοτικού", 4:"Δ΄ Δημοτικού", 5:"Ε΄ Δημοτικού", 6:"ΣΤ΄ Δημοτικού" };
-  var DEFAULT_GRADE = 3, MAX_NAME = 30, COUNTS = [5, 10, 15], DEFAULT_COUNT = 10;
-  var KEY = "mathapp.v1";
-  var SECTION_BY_CODE = {}; SECTIONS.forEach(function (s) { SECTION_BY_CODE[s.code] = s; });
-  var QUESTION_BY_CODE = {}; QUESTIONS.forEach(function (q) { QUESTION_BY_CODE[q.code] = q; });
+  var KEY = "mathapp.v2", MAX_NAME = 30, MAX_PROMPT = 300, MAX_OPTION = 80, MAX_EXPL = 400, MAX_TITLE = 40;
+  var LETTERS = ["Α", "Β", "Γ", "Δ"];
+  var TINTS = ["#BDE0FE", "#FFD6A5", "#CDEAC0", "#E4D4FF", "#FFC8DD", "#FDF0A6", "#B9F0E6", "#FFD0C2"];
 
   // ------------------------------------------------------------------
   // Βοηθητικές συναρτήσεις
@@ -119,20 +171,32 @@ th { background:var(--soft); font-weight:600; }
     else if (typeof kid === "string" || typeof kid === "number") el.appendChild(document.createTextNode(String(kid)));
     else el.appendChild(kid);
   }
+  function svg(tag, attrs) {
+    var el = document.createElementNS("http://www.w3.org/2000/svg", tag);
+    Object.keys(attrs || {}).forEach(function (k) { el.setAttribute(k, attrs[k]); });
+    for (var i = 2; i < arguments.length; i++) if (arguments[i]) el.appendChild(arguments[i]);
+    return el;
+  }
   function uid() {
     if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
     return "id" + Date.now().toString(36) + Math.random().toString(36).slice(2, 10);
   }
   function nowIso() { return new Date().toISOString(); }
   function percentOf(part, whole) { return whole > 0 ? Math.floor(100 * part / whole + 0.5) : 0; }
-  function nameKey(name) {
-    return name.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/ς/g, "σ").replace(/\s+/g, " ").trim();
-  }
+  function stripMarks(s) { return s.normalize("NFD").replace(/[̀-ͯ]/g, ""); }
+  function normKey(s) { return stripMarks(s).toUpperCase().replace(/\s+/g, " ").trim(); }
+  function nameKey(name) { return stripMarks(name).toLowerCase().replace(/ς/g, "σ").replace(/\s+/g, " ").trim(); }
   function cleanName(name) { return String(name).replace(/\s+/g, " ").trim(); }
+  function isInt(n) { return typeof n === "number" && isFinite(n) && Math.floor(n) === n && n >= 0; }
   function shuffle(arr) {
     var a = arr.slice();
     for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; }
     return a;
+  }
+  function hashStr(s) {
+    var x = 0x811c9dc5;
+    for (var i = 0; i < s.length; i++) { x ^= s.charCodeAt(i); x = Math.imul(x, 0x01000193) >>> 0; }
+    return ("00000000" + x.toString(16)).slice(-8);
   }
   function fmtDate(iso) {
     var d = new Date(iso);
@@ -143,52 +207,170 @@ th { background:var(--soft); font-weight:600; }
     var d = new Date(iso);
     return isNaN(d.getTime()) ? "—" : d.toLocaleDateString("el-GR", { day: "2-digit", month: "2-digit", year: "numeric" });
   }
+  function snip(s) { return s.length > 50 ? s.slice(0, 50) + "…" : s; }
+
+  // ------------------------------------------------------------------
+  // Ανάγνωση του αρχείου ερωτήσεων (questions.js)
+  // ------------------------------------------------------------------
+  function parseBank(text) {
+    var res = { grade: "", set: "", topics: [], errors: [], warnings: [] };
+    var lines = String(text).replace(/\r\n?/g, "\n").split("\n");
+    var topic = null, block = "practice", q = null, last = null, titles = {};
+    function err(msg) { res.errors.push(msg); }
+
+    function closeQ() {
+      if (!q) return;
+      var where = "Ενότητα «" + topic.title + "», " + (q.block === "test" ? "Τεστάκι, " : "") + "ερώτηση " + q.no + ": ";
+      var bad = [];
+      if (!q.prompt.trim()) bad.push("λείπει η εκφώνηση (γραμμή που αρχίζει με ?)");
+      else if (q.prompt.length > MAX_PROMPT) bad.push("η εκφώνηση είναι πολύ μεγάλη (πάνω από " + MAX_PROMPT + " χαρακτήρες)");
+      var n = q.options.length;
+      if (n < 2 || n > 4) bad.push("χρειάζονται 2 έως 4 απαντήσεις (έχει " + n + ")");
+      if (q.correctIdx.length === 0) bad.push("δεν έχει σωστή απάντηση (βάλε * μπροστά από τη σωστή)");
+      if (q.correctIdx.length > 1) bad.push("έχει περισσότερες από μία σωστές απαντήσεις (μόνο μία γραμμή να αρχίζει με *)");
+      var seen = {};
+      q.options.forEach(function (o, i) {
+        var t = o.trim();
+        if (!t) bad.push("η απάντηση " + (i + 1) + " είναι κενή");
+        else if (t.length > MAX_OPTION) bad.push("η απάντηση «" + snip(t) + "» είναι πολύ μεγάλη (πάνω από " + MAX_OPTION + " χαρακτήρες)");
+        var key = t.toLowerCase();
+        if (t && seen[key]) bad.push("η απάντηση «" + snip(t) + "» υπάρχει δύο φορές");
+        seen[key] = true;
+      });
+      if (q.explanation === null || !q.explanation.trim()) bad.push("λείπει η εξήγηση (γραμμή που αρχίζει με !)");
+      else if (q.explanation.length > MAX_EXPL) bad.push("η εξήγηση είναι πολύ μεγάλη (πάνω από " + MAX_EXPL + " χαρακτήρες)");
+      if (bad.length) bad.forEach(function (b) { err(where + b); });
+      else topic[q.block].push({ prompt: q.prompt.trim(), options: q.options.map(function (o) { return o.trim(); }),
+        correct: q.correctIdx[0], explanation: q.explanation.trim() });
+      q = null; last = null;
+    }
+
+    for (var i = 0; i < lines.length; i++) {
+      var t = lines[i].trim();
+      if (!t || t.charAt(0) === "#") continue;
+      var m = /^(==|--|\?|\*|-|!)(?:\s+(.*))?$/.exec(t);
+      if (!topic && !(m && m[1] === "==")) {
+        var mm = /^([^:]{1,12}):\s*(.*)$/.exec(t), k = mm ? normKey(mm[1]) : "";
+        if (k === "ΤΑΞΗ") res.grade = mm[2].trim();
+        else if (k === "ΣΕΤ") res.set = mm[2].trim();
+        else err("Η γραμμή «" + snip(t) + "» βρίσκεται πριν από την πρώτη ενότητα. Κάθε ενότητα ξεκινά με «== Όνομα ενότητας».");
+        continue;
+      }
+      if (!m) {
+        if (q && last) {
+          if (last === "prompt") q.prompt += " " + t;
+          else if (last === "opt") q.options[q.options.length - 1] += " " + t;
+          else q.explanation += " " + t;
+        } else err("Ενότητα «" + topic.title + "»: η γραμμή «" + snip(t) + "» δεν ανήκει σε ερώτηση (λείπει ένα από τα σύμβολα ?  *  -  ! στην αρχή;).");
+        continue;
+      }
+      var mk = m[1], tx = (m[2] || "").trim();
+      if (mk === "==") {
+        closeQ();
+        if (!tx) err("Υπάρχει γραμμή «==» χωρίς όνομα ενότητας.");
+        else if (tx.length > MAX_TITLE) err("Το όνομα ενότητας «" + snip(tx) + "» είναι πολύ μεγάλο (πάνω από " + MAX_TITLE + " χαρακτήρες).");
+        if (titles[normKey(tx)]) err("Η ενότητα «" + tx + "» υπάρχει δύο φορές.");
+        titles[normKey(tx)] = true;
+        topic = { title: tx || "(χωρίς όνομα)", practice: [], test: [], hasTest: false, count: { practice: 0, test: 0 } };
+        res.topics.push(topic); block = "practice"; last = null;
+      } else if (mk === "--") {
+        closeQ(); var key = normKey(tx);
+        if (key.indexOf("ΤΕΣΤ") >= 0) {
+          if (topic.hasTest) err("Ενότητα «" + topic.title + "»: η γραμμή «-- Τεστάκι» υπάρχει δύο φορές.");
+          topic.hasTest = true; block = "test";
+        } else if (key.indexOf("ΕΞΑΣΚ") >= 0) {
+          if (topic.practice.length || topic.hasTest) err("Ενότητα «" + topic.title + "»: η γραμμή «-- Εξάσκηση» πρέπει να είναι στην αρχή της ενότητας.");
+          block = "practice";
+        } else err("Ενότητα «" + topic.title + "»: άγνωστη γραμμή «-- " + snip(tx) + "». Επιτρέπονται μόνο «-- Εξάσκηση» και «-- Τεστάκι».");
+        last = null;
+      } else if (mk === "?") {
+        closeQ();
+        q = { prompt: tx, options: [], correctIdx: [], explanation: null, block: block, no: ++topic.count[block] };
+        last = "prompt";
+      } else if (mk === "*" || mk === "-") {
+        if (!q) { err("Ενότητα «" + topic.title + "»: η απάντηση «" + snip(tx) + "» δεν έχει ερώτηση από πάνω (γραμμή με ?)."); continue; }
+        if (q.explanation !== null) { err("Ενότητα «" + topic.title + "», ερώτηση " + q.no + ": οι απαντήσεις πρέπει να γράφονται πριν από την εξήγηση (!)."); continue; }
+        if (mk === "*") q.correctIdx.push(q.options.length);
+        q.options.push(tx); last = "opt";
+      } else {
+        if (!q) { err("Ενότητα «" + topic.title + "»: η εξήγηση «" + snip(tx) + "» δεν έχει ερώτηση από πάνω (γραμμή με ?)."); continue; }
+        if (q.explanation !== null) { err("Ενότητα «" + topic.title + "», ερώτηση " + q.no + ": υπάρχουν δύο εξηγήσεις (!)."); continue; }
+        q.explanation = tx; last = "exp";
+      }
+    }
+    closeQ();
+
+    if (!res.topics.length) err("Δεν βρέθηκε καμία ενότητα. Κάθε ενότητα ξεκινά με «== Όνομα ενότητας».");
+    if (res.topics.length > 12) err("Οι ενότητες είναι πάρα πολλές (" + res.topics.length + "). Το μέγιστο είναι 12.");
+    res.topics.forEach(function (tp, idx) {
+      if (!tp.practice.length) err("Η ενότητα «" + tp.title + "» δεν έχει ερωτήσεις.");
+      if (tp.hasTest && !tp.test.length) err("Η ενότητα «" + tp.title + "» έχει «-- Τεστάκι» αλλά καμία ερώτηση από κάτω.");
+      if (tp.practice.length > 30 || tp.test.length > 30) err("Η ενότητα «" + tp.title + "» έχει πάνω από 30 ερωτήσεις.");
+      if (tp.practice.length && tp.practice.length !== 10) res.warnings.push("Ενότητα «" + tp.title + "»: η Εξάσκηση έχει " + tp.practice.length + " ερωτήσεις (συνήθως 10).");
+      if (tp.hasTest && tp.test.length && tp.test.length !== 10) res.warnings.push("Ενότητα «" + tp.title + "»: το Τεστάκι έχει " + tp.test.length + " ερωτήσεις (συνήθως 10).");
+      ["practice", "test"].forEach(function (b) {
+        var seen = {};
+        tp[b].forEach(function (x) {
+          if (seen[x.prompt]) res.warnings.push("Ενότητα «" + tp.title + "»: η ερώτηση «" + snip(x.prompt) + "» υπάρχει δύο φορές.");
+          seen[x.prompt] = true;
+        });
+      });
+      tp.testQs = tp.hasTest ? tp.test : tp.practice;
+      tp.practiceQs = tp.practice;
+      tp.ck = hashStr(JSON.stringify([tp.title, tp.practice, tp.test]));
+      tp.tint = TINTS[idx % TINTS.length];
+      tp.icon = iconFor(tp.title);
+    });
+    return res;
+  }
+  function iconFor(title) {
+    var s = stripMarks(title).toLowerCase();
+    if (s.indexOf("πολλαπλ") >= 0) return "×";
+    if (s.indexOf("διαιρ") >= 0) return "÷";
+    if (s.indexOf("προσθ") >= 0 || s.indexOf("αφαιρ") >= 0) return "+ −";
+    if (s.indexOf("γεωμ") >= 0) return "△";
+    if (s.indexOf("μετρ") >= 0 || s.indexOf("μοναδ") >= 0) return "cm";
+    if (s.indexOf("προβλ") >= 0) return "?";
+    return title.charAt(0).toUpperCase();
+  }
 
   // ------------------------------------------------------------------
   // Αποθήκευση (localStorage, μόνο σε αυτή τη συσκευή/browser)
   // ------------------------------------------------------------------
-  var storageOk = true, store = { version: 1, profiles: [], tests: [] }, loadNotice = "";
+  var storageOk = true, store = { version: 2, profiles: [], runs: [] }, loadNotice = "";
 
   function probeStorage() {
     try { localStorage.setItem(KEY + ".probe", "1"); localStorage.removeItem(KEY + ".probe"); return true; }
     catch (e) { return false; }
   }
-  function isInt(n) { return typeof n === "number" && isFinite(n) && Math.floor(n) === n && n >= 0; }
+  function str(v, max) { return typeof v === "string" ? v.slice(0, max) : ""; }
 
-  // Καθαρίζει/ελέγχει δεδομένα (και από αρχείο εισαγωγής). Δεν εμπιστεύεται τίποτα.
+  // Ελέγχει/καθαρίζει δεδομένα (και από αρχείο εισαγωγής). Δεν εμπιστεύεται τίποτα.
   function sanitize(raw) {
-    var out = { version: 1, profiles: [], tests: [] };
-    if (!raw || typeof raw !== "object" || !Array.isArray(raw.profiles) || !Array.isArray(raw.tests)) return null;
+    var out = { version: 2, profiles: [], runs: [] };
+    if (!raw || typeof raw !== "object" || raw.version !== 2 || !Array.isArray(raw.profiles) || !Array.isArray(raw.runs)) return null;
     var ids = {};
     raw.profiles.forEach(function (p) {
       if (!p || typeof p.id !== "string" || typeof p.name !== "string" || ids[p.id]) return;
       var name = cleanName(p.name).slice(0, MAX_NAME);
-      if (!name || !GRADES[p.grade]) return;
+      if (!name) return;
       ids[p.id] = true;
-      out.profiles.push({ id: p.id.slice(0, 80), name: name, grade: p.grade, createdAt: typeof p.createdAt === "string" ? p.createdAt : nowIso() });
+      out.profiles.push({ id: p.id.slice(0, 80), name: name, createdAt: str(p.createdAt, 40) || nowIso() });
     });
     var tokens = {};
-    raw.tests.forEach(function (t) {
-      if (!t || typeof t.token !== "string" || tokens[t.token] || !ids[t.profileId] || !Array.isArray(t.answers) || !t.answers.length) return;
-      var answers = [], seen = {};
-      for (var i = 0; i < t.answers.length; i++) {
-        var a = t.answers[i];
-        if (!a || typeof a.q !== "string" || !isInt(a.c) || typeof a.ok !== "boolean" || seen[a.q]) return;
-        seen[a.q] = true;
-        answers.push({ q: a.q, c: a.c, ok: a.ok, at: typeof a.at === "string" ? a.at : nowIso() });
-      }
-      var section = (typeof t.section === "string" && SECTION_BY_CODE[t.section]) ? t.section : null;
-      tokens[t.token] = true;
-      out.tests.push({
-        id: typeof t.id === "string" ? t.id.slice(0, 80) : uid(), profileId: t.profileId, section: section, token: t.token,
-        n: answers.length, score: answers.filter(function (a) { return a.ok; }).length, answers: answers,
-        startedAt: typeof t.startedAt === "string" ? t.startedAt : nowIso(),
-        completedAt: typeof t.completedAt === "string" ? t.completedAt : nowIso()
-      });
+    raw.runs.forEach(function (r) {
+      if (!r || typeof r.token !== "string" || tokens[r.token] || !ids[r.profileId]) return;
+      if (r.mode !== "practice" && r.mode !== "test") return;
+      if (!isInt(r.n) || r.n < 1 || r.n > 50 || !isInt(r.score) || r.score > r.n) return;
+      var topic = str(r.topic, 60).trim();
+      if (!topic) return;
+      tokens[r.token] = true;
+      out.runs.push({ id: str(r.id, 80) || uid(), profileId: r.profileId, mode: r.mode, topic: topic, ck: str(r.ck, 16),
+        set: str(r.set, 60), token: r.token.slice(0, 80), n: r.n, score: r.score,
+        startedAt: str(r.startedAt, 40) || nowIso(), completedAt: str(r.completedAt, 40) || nowIso() });
     });
     return out;
   }
-
   function loadStore() {
     storageOk = probeStorage();
     if (!storageOk) return;
@@ -207,319 +389,320 @@ th { background:var(--soft); font-weight:600; }
     catch (e) { storageOk = false; return false; }
   }
 
-  // ------------------------------------------------------------------
-  // Λογική τεστ
-  // ------------------------------------------------------------------
-  function questionsFor(grade, sectionCode) {
-    return QUESTIONS.filter(function (q) { return q.grade === grade && (!sectionCode || q.section === sectionCode); });
-  }
-  function makeRun(profile, sectionCode, questions, settings) {
-    return {
-      profileId: profile.id, section: sectionCode, token: uid(), startedAt: nowIso(), idx: 0, saved: false, savedOk: false,
-      settings: settings, selected: null, answers: {},
-      items: questions.map(function (q) { return { q: q, order: shuffle(q.options.map(function (_, i) { return i; })) }; })
-    };
-  }
-  function startRun(profile, sectionCode, count) {
-    var pool = questionsFor(profile.grade, sectionCode);
-    if (!pool.length) return null;
-    var picked = shuffle(pool).slice(0, Math.min(count, pool.length));
-    return makeRun(profile, sectionCode, picked, { section: sectionCode, count: count });
-  }
-  function currentItem(run) { return run.idx < run.items.length ? run.items[run.idx] : null; }
-  function isFinished(run) { return run.idx >= run.items.length; }
-  // Καταχωρεί απάντηση (πρωτότυπος δείκτης επιλογής). Μία φορά ανά ερώτηση.
-  function submitAnswer(run, chosen) {
-    var item = currentItem(run);
-    if (!item) return null;
-    var existing = run.answers[item.q.code];
-    if (existing) return existing.ok;
-    if (!isInt(chosen) || chosen >= item.q.options.length) return null;
-    var ok = chosen === item.q.correct;
-    run.answers[item.q.code] = { q: item.q.code, c: chosen, ok: ok, at: nowIso() };
-    return ok;
-  }
-  function advanceRun(run) {
-    var item = currentItem(run);
-    if (!item || !run.answers[item.q.code]) return;
-    run.idx++; run.selected = null;
-  }
-  function runResult(run) {
-    var review = run.items.map(function (it) { var a = run.answers[it.q.code]; return { q: it.q, a: a }; });
-    var score = review.filter(function (r) { return r.a.ok; }).length;
-    var bySec = {};
-    review.forEach(function (r) {
-      var s = bySec[r.q.section] || (bySec[r.q.section] = { code: r.q.section, title: SECTION_BY_CODE[r.q.section].title, correct: 0, total: 0 });
-      s.total++; if (r.a.ok) s.correct++;
-    });
-    var order = SECTIONS.map(function (s) { return s.code; });
-    return {
-      score: score, total: review.length, percent: percentOf(score, review.length), review: review,
-      bySection: Object.keys(bySec).sort(function (a, b) { return order.indexOf(a) - order.indexOf(b); }).map(function (k) { return bySec[k]; }),
-      wrong: review.filter(function (r) { return !r.a.ok; }).map(function (r) { return r.q; })
-    };
-  }
-  // Αποθήκευση μία φορά ανά τεστ (token). Επιστρέφει true αν το τεστ υπάρχει πια αποθηκευμένο.
-  function saveRun(run) {
-    if (run.saved) return run.savedOk;
-    var exists = store.tests.some(function (t) { return t.token === run.token; });
-    if (!exists) {
-      var answers = run.items.map(function (it) { return run.answers[it.q.code]; });
-      store.tests.push({
-        id: uid(), profileId: run.profileId, section: run.section, token: run.token, n: answers.length,
-        score: answers.filter(function (a) { return a.ok; }).length, answers: answers,
-        startedAt: run.startedAt, completedAt: nowIso()
-      });
-      if (!persist()) { store.tests.pop(); return false; }
-    }
-    run.saved = true; run.savedOk = true;
-    return true;
-  }
-  function testsOf(profileId) {
-    return store.tests.filter(function (t) { return t.profileId === profileId; })
-      .sort(function (a, b) { return a.completedAt < b.completedAt ? 1 : a.completedAt > b.completedAt ? -1 : 0; });
-  }
-  function averagePercent(tests) {
-    if (!tests.length) return null;
-    var sum = tests.reduce(function (acc, t) { return acc + 100 * t.score / t.n; }, 0);
-    return Math.floor(sum / tests.length + 0.5);
-  }
-  function sectionPerformance(profileId) {
-    var perf = {};
-    testsOf(profileId).forEach(function (t) {
-      t.answers.forEach(function (a) {
-        var q = QUESTION_BY_CODE[a.q]; if (!q) return;
-        var p = perf[q.section] || (perf[q.section] = { answered: 0, correct: 0 });
-        p.answered++; if (a.ok) p.correct++;
-      });
-    });
-    return perf;
-  }
-  function addProfile(name, grade) {
+  function addProfile(name) {
     var clean = cleanName(name);
-    if (!clean) return { error: "Το όνομα είναι υποχρεωτικό." };
+    if (!clean) return { error: "Γράψε ένα όνομα ή ψευδώνυμο." };
     if (clean.length > MAX_NAME) return { error: "Το όνομα μπορεί να έχει έως " + MAX_NAME + " χαρακτήρες." };
-    if (!GRADES[grade]) return { error: "Διάλεξε τάξη." };
     var key = nameKey(clean);
     if (store.profiles.some(function (p) { return nameKey(p.name) === key; })) return { error: "Υπάρχει ήδη προφίλ με αυτό το όνομα. Διάλεξε άλλο." };
-    var p = { id: uid(), name: clean, grade: grade, createdAt: nowIso() };
+    var p = { id: uid(), name: clean, createdAt: nowIso() };
     store.profiles.push(p);
     if (!persist()) { store.profiles.pop(); return { error: "Η αποθήκευση δεν είναι διαθέσιμη σε αυτόν τον browser." }; }
     return { profile: p };
   }
   function removeProfile(id) {
-    var before = { profiles: store.profiles, tests: store.tests };
+    var before = { profiles: store.profiles, runs: store.runs };
     store.profiles = store.profiles.filter(function (p) { return p.id !== id; });
-    store.tests = store.tests.filter(function (t) { return t.profileId !== id; });
-    if (!persist()) { store.profiles = before.profiles; store.tests = before.tests; return false; }
+    store.runs = store.runs.filter(function (r) { return r.profileId !== id; });
+    if (!persist()) { store.profiles = before.profiles; store.runs = before.runs; return false; }
     return true;
   }
-  // Συγχώνευση αρχείου εισαγωγής: προφίλ με ίδιο όνομα ενώνονται, τεστ με ίδιο token δεν διπλασιάζονται.
   function mergeImport(raw) {
+    if (raw && typeof raw === "object" && raw.version === 1) return { error: "Το αρχείο είναι από παλιότερη έκδοση της εφαρμογής και δεν μπορεί να επαναφερθεί." };
     var clean = sanitize(raw);
     if (!clean) return { error: "Το αρχείο δεν είναι έγκυρο αρχείο προόδου." };
-    var backup = JSON.stringify(store), idMap = {}, addedProfiles = 0, addedTests = 0;
+    var backup = JSON.stringify(store), idMap = {}, addedProfiles = 0, addedRuns = 0;
     clean.profiles.forEach(function (p) {
       var key = nameKey(p.name);
       var found = store.profiles.filter(function (x) { return nameKey(x.name) === key; })[0];
       if (found) { idMap[p.id] = found.id; return; }
-      var np = { id: uid(), name: p.name, grade: p.grade, createdAt: p.createdAt };
+      var np = { id: uid(), name: p.name, createdAt: p.createdAt };
       store.profiles.push(np); idMap[p.id] = np.id; addedProfiles++;
     });
-    var tokens = {}; store.tests.forEach(function (t) { tokens[t.token] = true; });
-    clean.tests.forEach(function (t) {
-      if (tokens[t.token] || !idMap[t.profileId]) return;
-      t.profileId = idMap[t.profileId]; t.id = uid(); store.tests.push(t); tokens[t.token] = true; addedTests++;
+    var tokens = {}; store.runs.forEach(function (r) { tokens[r.token] = true; });
+    clean.runs.forEach(function (r) {
+      if (tokens[r.token] || !idMap[r.profileId]) return;
+      r.profileId = idMap[r.profileId]; r.id = uid(); store.runs.push(r); tokens[r.token] = true; addedRuns++;
     });
     if (!persist()) { store = JSON.parse(backup); return { error: "Η αποθήκευση δεν είναι διαθέσιμη σε αυτόν τον browser." }; }
-    return { profiles: addedProfiles, tests: addedTests };
+    return { profiles: addedProfiles, runs: addedRuns };
+  }
+
+  // ------------------------------------------------------------------
+  // Λογική εξάσκησης και τεστ
+  // ------------------------------------------------------------------
+  // mode: "practice" | "test". opts.retry: επανάληψη λαθών (δεν αποθηκεύεται).
+  function makeRun(profile, topic, mode, questions, opts) {
+    var list = mode === "test" ? shuffle(questions) : questions.slice();
+    return {
+      profileId: profile.id, topic: topic, mode: mode, token: uid(), startedAt: nowIso(), idx: 0, selected: null,
+      retry: !!(opts && opts.retry), saved: false, savedOk: false, answers: {},
+      items: list.map(function (q) { return { q: q, order: shuffle(q.options.map(function (_, i) { return i; })) }; })
+    };
+  }
+  function startRun(profile, topic, mode) {
+    return makeRun(profile, topic, mode, mode === "test" ? topic.testQs : topic.practiceQs, null);
+  }
+  function currentItem(run) { return run.idx < run.items.length ? run.items[run.idx] : null; }
+  function isFinished(run) { return run.idx >= run.items.length; }
+  function submitAnswer(run, chosen) {
+    var item = currentItem(run);
+    if (!item) return null;
+    var existing = run.answers[run.idx];
+    if (existing) return existing.ok;
+    if (!isInt(chosen) || chosen >= item.q.options.length) return null;
+    var ok = chosen === item.q.correct;
+    run.answers[run.idx] = { c: chosen, ok: ok };
+    return ok;
+  }
+  function advanceRun(run) {
+    if (!currentItem(run) || !run.answers[run.idx]) return;
+    run.idx++; run.selected = null;
+  }
+  function runResult(run) {
+    var review = run.items.map(function (it, i) { return { q: it.q, a: run.answers[i] }; });
+    var score = review.filter(function (r) { return r.a && r.a.ok; }).length;
+    return { score: score, total: review.length, review: review,
+      wrong: review.filter(function (r) { return !r.a || !r.a.ok; }).map(function (r) { return r.q; }) };
+  }
+  function saveRun(run) {
+    if (run.retry) { run.saved = true; run.savedOk = true; return true; }
+    if (run.saved) return run.savedOk;
+    var exists = store.runs.some(function (r) { return r.token === run.token; });
+    if (!exists) {
+      var res = runResult(run);
+      store.runs.push({ id: uid(), profileId: run.profileId, mode: run.mode, topic: run.topic.title, ck: run.topic.ck,
+        set: bank.set.slice(0, 60), token: run.token, n: res.total, score: res.score, startedAt: run.startedAt, completedAt: nowIso() });
+      if (!persist()) { store.runs.pop(); return false; }
+    }
+    run.saved = true; run.savedOk = true;
+    return true;
+  }
+  function runsOf(profileId, mode) {
+    return store.runs.filter(function (r) { return r.profileId === profileId && (!mode || r.mode === mode); })
+      .sort(function (a, b) { return a.completedAt < b.completedAt ? 1 : a.completedAt > b.completedAt ? -1 : 0; });
+  }
+  function topicStatus(profileId, topic) {
+    var practiceDone = false, best = null;
+    store.runs.forEach(function (r) {
+      if (r.profileId !== profileId || r.ck !== topic.ck) return;
+      if (r.mode === "practice") practiceDone = true;
+      else if (best === null || r.score > best) best = r.score;
+    });
+    return { practiceDone: practiceDone, best: best };
+  }
+  function averagePercent(runs) {
+    if (!runs.length) return null;
+    return Math.floor(runs.reduce(function (a, r) { return a + 100 * r.score / r.n; }, 0) / runs.length + 0.5);
   }
 
   // ------------------------------------------------------------------
   // Διεπαφή
   // ------------------------------------------------------------------
-  var ui = { view: "student", profileId: null, run: null, flash: null, confirmDelete: false, selSection: "", selCount: DEFAULT_COUNT };
+  var bank = null;
+  var ui = { view: "student", profileId: null, run: null, flash: null, confirmDelete: false, adding: false };
   var app = document.getElementById("app");
 
+  function sortedProfiles() { return store.profiles.slice().sort(function (a, b) { return nameKey(a.name) < nameKey(b.name) ? -1 : 1; }); }
   function activeProfile() {
     var p = store.profiles.filter(function (x) { return x.id === ui.profileId; })[0];
-    if (!p && store.profiles.length) { p = store.profiles.slice().sort(function (a, b) { return nameKey(a.name) < nameKey(b.name) ? -1 : 1; })[0]; ui.profileId = p.id; }
+    if (!p && store.profiles.length) { p = sortedProfiles()[0]; ui.profileId = p.id; }
     return p || null;
   }
   function setFlash(kind, text) { ui.flash = { kind: kind, text: text }; }
+  function go(fn) { return function () { fn(); }; }
+
+  function logo() {
+    return svg("svg", { "class": "logo", viewBox: "0 0 64 64", "aria-hidden": "true", focusable: "false" },
+      svg("circle", { cx: "20", cy: "22", r: "13", fill: "#FFC933", stroke: "#14213D", "stroke-width": "3" }),
+      svg("rect", { x: "34", y: "30", width: "24", height: "24", rx: "4", fill: "#BDE0FE", stroke: "#14213D", "stroke-width": "3", transform: "rotate(10 46 42)" }),
+      svg("polygon", { points: "8,58 26,32 44,58", fill: "#FFC8DD", stroke: "#14213D", "stroke-width": "3", "stroke-linejoin": "round" }));
+  }
+  function header(rightBtn) {
+    return h("div", { class: "top" },
+      h("div", { class: "brand" }, logo(), h("div", null,
+        h("h1", { class: "title", text: "Μαθαίνω Μαθηματικά" }),
+        h("p", { class: "subtitle", text: "Λίγη εξάσκηση κάθε μέρα" }))),
+      rightBtn || null);
+  }
+  function banners() {
+    var out = [];
+    if (!storageOk) out.push(h("div", { class: "banner error", role: "alert", text: "Η αποθήκευση δεν είναι διαθέσιμη σε αυτόν τον browser ή τρόπο περιήγησης (π.χ. ιδιωτική περιήγηση). Η πρόοδος δεν θα κρατηθεί όταν κλείσει η σελίδα." }));
+    if (loadNotice) out.push(h("div", { class: "banner error", role: "alert", text: loadNotice }));
+    if (ui.flash) { out.push(h("div", { class: "banner" + (ui.flash.kind === "error" ? " error" : ""), role: ui.flash.kind === "error" ? "alert" : "status", text: ui.flash.text })); ui.flash = null; }
+    return out;
+  }
 
   function render(focusSel) {
     var profile = activeProfile();
-    var root = h("div", null,
-      h("h1", { class: "title", text: "Μαθαίνω Μαθηματικά" }),
-      h("p", { class: "subtitle", text: "Λίγη εξάσκηση κάθε μέρα" }),
-      h("div", { class: "rule" }));
-    if (!storageOk) root.appendChild(h("div", { class: "banner error", role: "alert", text: "Η αποθήκευση δεν είναι διαθέσιμη σε αυτόν τον browser ή τρόπο περιήγησης (π.χ. ιδιωτική περιήγηση). Η πρόοδος δεν θα κρατηθεί όταν κλείσει η σελίδα." }));
-    if (loadNotice) root.appendChild(h("div", { class: "banner error", role: "alert", text: loadNotice }));
-    if (ui.flash) { root.appendChild(h("div", { class: "banner" + (ui.flash.kind === "error" ? " error" : ""), role: ui.flash.kind === "error" ? "alert" : "status", text: ui.flash.text })); ui.flash = null; }
-
-    root.appendChild(profileBar(profile));
-    if (profile) {
-      root.appendChild(h("div", { class: "seg", role: "group", "aria-label": "Περιβάλλον" },
-        h("button", { type: "button", "aria-pressed": String(ui.view === "student"), text: "Μαθητής", onclick: function () { ui.view = "student"; render(); } }),
-        h("button", { type: "button", "aria-pressed": String(ui.view === "parent"), text: "Γονέας", onclick: function () { ui.view = "parent"; render(); } })));
-      root.appendChild(h("hr", { class: "sep" }));
-      root.appendChild(ui.view === "parent" ? parentView(profile) : studentView(profile));
-    } else {
-      root.appendChild(h("p", { text: "Δημιούργησε ένα προφίλ για να ξεκινήσεις." }));
+    var parentBtn = null;
+    if (profile && !ui.run) {
+      parentBtn = ui.view === "parent"
+        ? h("button", { type: "button", class: "btn small", id: "toggleview", text: "Πίσω στα παιδιά", onclick: function () { ui.view = "student"; render(); } })
+        : h("button", { type: "button", class: "btn small", id: "toggleview", text: "Για γονείς", onclick: function () { ui.view = "parent"; render(); } });
     }
-    root.appendChild(h("p", { class: "muted", text: "Η πρόοδος αποθηκεύεται μόνο σε αυτή τη συσκευή και σε αυτόν τον browser. Δεν στέλνεται πουθενά." }));
+    var root = h("div", null, header(parentBtn), banners());
+    if (!profile) root.appendChild(onboarding());
+    else if (ui.run) root.appendChild(isFinished(ui.run) ? resultView(profile, ui.run) : questionView(profile, ui.run));
+    else {
+      root.appendChild(profileChips(profile));
+      root.appendChild(ui.view === "parent" ? parentView(profile) : homeView(profile));
+    }
+    root.appendChild(h("p", { class: "muted", style: "margin-top:2rem", text: "Η πρόοδος αποθηκεύεται μόνο σε αυτή τη συσκευή και σε αυτόν τον browser. Δεν στέλνεται πουθενά." }));
     app.replaceChildren(root);
     if (focusSel) { var el = app.querySelector(focusSel); if (el) el.focus(); }
   }
 
-  function profileBar(profile) {
-    var locked = !!ui.run;
-    var parts = [];
-    if (store.profiles.length) {
-      var sorted = store.profiles.slice().sort(function (a, b) { return nameKey(a.name) < nameKey(b.name) ? -1 : 1; });
-      var sel = h("select", { id: "profile", disabled: locked, onchange: function (e) { ui.profileId = e.target.value; ui.confirmDelete = false; render(); } },
-        sorted.map(function (p) { return h("option", { value: p.id, selected: profile && p.id === profile.id, text: p.name + " — " + GRADES[p.grade] }); }));
-      parts.push(h("label", { for: "profile", text: "Προφίλ" }), sel);
-      if (locked) parts.push(h("p", { class: "muted", text: "Για να αλλάξεις προφίλ, γύρνα πρώτα στην αρχική οθόνη ή διέκοψε το τεστ." }));
-    }
-    var nameInput = h("input", { type: "text", id: "newname", maxlength: String(MAX_NAME), autocomplete: "off" });
-    var gradeSel = h("select", { id: "newgrade" }, Object.keys(GRADES).map(function (g) { return h("option", { value: g, selected: Number(g) === DEFAULT_GRADE, text: GRADES[g] }); }));
-    var form = h("form", { onsubmit: function (e) {
+  // ---------------- Προφίλ ----------------
+  function profileForm(first) {
+    var input = h("input", { type: "text", id: "newname", maxlength: String(MAX_NAME), autocomplete: "off" });
+    return h("form", { class: "panel", onsubmit: function (e) {
       e.preventDefault();
-      var r = addProfile(nameInput.value, Number(gradeSel.value));
-      if (r.error) setFlash("error", r.error); else { ui.profileId = r.profile.id; ui.view = "student"; setFlash("ok", "Το προφίλ δημιουργήθηκε."); }
+      var r = addProfile(input.value);
+      if (r.error) setFlash("error", r.error); else { ui.profileId = r.profile.id; ui.view = "student"; ui.adding = false; setFlash("ok", "Το προφίλ δημιουργήθηκε."); }
       render();
     } },
-      h("p", { class: "muted", text: "Χρησιμοποίησε μικρό όνομα ή ψευδώνυμο. Μην γράφεις επώνυμο, τηλέφωνο ή άλλα στοιχεία επικοινωνίας." }),
-      h("label", { for: "newname", text: "Όνομα ή ψευδώνυμο" }), nameInput,
-      h("label", { for: "newgrade", text: "Τάξη" }), gradeSel,
-      h("button", { type: "submit", class: "primary", text: "Δημιουργία προφίλ" }));
-    var details = h("details", { open: !store.profiles.length }, h("summary", { text: "Νέο προφίλ" }), form);
-    parts.push(details);
-    return h("section", { "aria-label": "Προφίλ" }, parts);
+      h("label", { class: "lbl", for: "newname", text: first ? "Πώς σε λένε; Γράψε το όνομά σου ή ένα ψευδώνυμο." : "Όνομα ή ψευδώνυμο" }),
+      input,
+      h("p", { class: "muted", style: "margin:.5rem 0 0", text: "Μην γράφεις επώνυμο, τηλέφωνο ή άλλα στοιχεία επικοινωνίας." }),
+      h("button", { type: "submit", class: "btn primary block", style: "margin-bottom:.2rem", text: "Ξεκίνα" }));
+  }
+  function onboarding() {
+    return h("section", null, h("h2", { text: "Καλώς ήρθες!" }), h("p", { text: "Φτιάξε ένα προφίλ για να ξεκινήσεις." }), profileForm(true));
+  }
+  function profileChips(profile) {
+    var chips = sortedProfiles().map(function (p) {
+      return h("button", { type: "button", class: "chip", "aria-pressed": String(p.id === profile.id), text: p.name,
+        onclick: function () { ui.profileId = p.id; ui.confirmDelete = false; render(); } });
+    });
+    chips.push(h("button", { type: "button", class: "chip add", id: "addprofile", "aria-expanded": String(ui.adding), text: "+ Νέο προφίλ",
+      onclick: function () { ui.adding = !ui.adding; render(ui.adding ? "#newname" : null); } }));
+    return h("section", { "aria-label": "Προφίλ" }, h("div", { class: "chips", role: "group", "aria-label": "Προφίλ" }, chips), ui.adding ? profileForm(false) : null);
   }
 
-  // ---------------- Μαθητής ----------------
-  function studentView(profile) {
-    if (!ui.run) return homeView(profile);
-    return isFinished(ui.run) ? resultView(profile, ui.run) : questionView(profile, ui.run);
-  }
-
+  // ---------------- Αρχική (ενότητες) ----------------
   function homeView(profile) {
-    var sections = SECTIONS.map(function (s) { return { s: s, n: questionsFor(profile.grade, s.code).length }; }).filter(function (x) { return x.n > 0; });
-    var wrap = h("section", null, h("h2", { text: "Γεια σου, " + profile.name }));
-    if (!sections.length) {
-      wrap.appendChild(h("p", { text: "Δεν υπάρχει ακόμη ύλη για την τάξη «" + GRADES[profile.grade] + "». Προς το παρόν υπάρχουν ασκήσεις μόνο για τη Γ΄ Δημοτικού." }));
-      return wrap;
-    }
-    var total = sections.reduce(function (a, x) { return a + x.n; }, 0);
-    if (ui.selSection && !sections.some(function (x) { return x.s.code === ui.selSection; })) ui.selSection = "";
-    var secSel = h("select", { id: "section", onchange: function (e) { ui.selSection = e.target.value; render("#section"); } },
-      h("option", { value: "", selected: !ui.selSection, text: "Όλες οι ενότητες (" + total + " ερωτήσεις)" }),
-      sections.map(function (x) { return h("option", { value: x.s.code, selected: ui.selSection === x.s.code, text: x.s.title + " (" + x.n + " ερωτήσεις)" }); }));
-    var available = ui.selSection ? sections.filter(function (x) { return x.s.code === ui.selSection; })[0].n : total;
-    wrap.appendChild(h("label", { for: "section", text: "Ενότητα" }));
-    wrap.appendChild(secSel);
-    wrap.appendChild(h("fieldset", null,
-      h("legend", { text: "Αριθμός ερωτήσεων" }),
-      h("div", { class: "counts" }, COUNTS.map(function (c) {
-        return h("label", null, h("input", { type: "radio", name: "count", value: String(c), checked: ui.selCount === c,
-          onchange: function () { ui.selCount = c; render("input[name=count]:checked"); } }), String(c));
-      }))));
-    if (ui.selCount > available) wrap.appendChild(h("p", { class: "muted", text: "Σε αυτή την επιλογή υπάρχουν " + available + " ερωτήσεις, οπότε το τεστ θα έχει " + available + "." }));
-    wrap.appendChild(h("button", { type: "button", class: "primary", id: "start", text: "Έναρξη", onclick: function () {
-      var run = startRun(profile, ui.selSection || null, ui.selCount);
-      if (!run) { setFlash("error", "Δεν υπάρχουν διαθέσιμες ερωτήσεις για αυτή την επιλογή."); render(); return; }
-      ui.run = run; render("#qtitle");
-    } }));
+    var wrap = h("section", null, h("h2", { text: "Γεια σου, " + profile.name + "!" }),
+      h("p", { text: "Διάλεξε μια ενότητα. Κάνε πρώτα Εξάσκηση και μετά δοκίμασε το Τεστάκι." }));
+    var label = [bank.grade, bank.set].filter(Boolean).join(" · ");
+    if (label) wrap.appendChild(h("span", { class: "pill", id: "setlabel", text: label }));
+    wrap.appendChild(h("div", { class: "grid" }, bank.topics.map(function (topic) { return topicCard(profile, topic); })));
     return wrap;
   }
+  function topicCard(profile, topic) {
+    var st = topicStatus(profile.id, topic), tags = [];
+    if (st.practiceDone) tags.push(h("span", { class: "tag", text: "Εξάσκηση: ολοκληρώθηκε ✓" }));
+    if (st.best !== null) tags.push(h("span", { class: "tag", text: "Τεστάκι: καλύτερο " + st.best + "/" + topic.testQs.length }));
+    var count = topic.practiceQs.length + " ερωτήσεις" + (topic.hasTest && topic.testQs.length !== topic.practiceQs.length ? " (τεστάκι: " + topic.testQs.length + ")" : "");
+    return h("article", { class: "card", style: "--tint:" + topic.tint },
+      h("div", { class: "card-head" }, h("div", { class: "badge", "aria-hidden": "true", text: topic.icon }),
+        h("div", null, h("h3", { text: topic.title }), h("p", { class: "muted", text: count }))),
+      h("div", { class: "card-actions" },
+        h("button", { type: "button", class: "btn primary", "data-start": "practice", "aria-label": "Εξάσκηση: " + topic.title, text: "Εξάσκηση",
+          onclick: function () { ui.run = startRun(profile, topic, "practice"); render("#qtitle"); } }),
+        h("button", { type: "button", class: "btn", "data-start": "test", "aria-label": "Τεστάκι: " + topic.title, text: "Τεστάκι",
+          onclick: function () { ui.run = startRun(profile, topic, "test"); render("#qtitle"); } })),
+      tags.length ? h("div", { class: "tags" }, tags) : null);
+  }
 
+  // ---------------- Ερώτηση ----------------
   function questionView(profile, run) {
-    var item = currentItem(run), q = item.q, rec = run.answers[q.code], answered = !!rec;
+    var item = currentItem(run), q = item.q, rec = run.answers[run.idx], isPractice = run.mode === "practice";
+    var revealed = isPractice && !!rec;
     var wrap = h("section", null);
-    wrap.appendChild(h("div", { class: "muted", id: "qtitle", tabindex: "-1", text: "Ερώτηση " + (run.idx + 1) + " από " + run.items.length }));
-    wrap.appendChild(h("div", { class: "prog", role: "progressbar", "aria-valuemin": "0", "aria-valuemax": String(run.items.length), "aria-valuenow": String(run.idx) },
-      h("div", { style: "width:" + Math.round(100 * run.idx / run.items.length) + "%" })));
-    wrap.appendChild(h("div", { class: "muted", text: SECTION_BY_CODE[q.section].title }));
+    wrap.appendChild(h("div", { class: "runbar" },
+      h("button", { type: "button", class: "btn small", id: "exit", text: "← Έξοδος", onclick: function () { ui.run = null; render(); } }),
+      h("span", { class: "pill", text: (isPractice ? "Εξάσκηση" : "Τεστάκι") + " · " + run.topic.title })));
+    wrap.appendChild(h("ol", { class: "dots", "aria-hidden": "true" }, run.items.map(function (_, i) { return h("li", { class: i < run.idx ? "done" : i === run.idx ? "now" : "" }); })));
+    wrap.appendChild(h("div", { class: "qcount", id: "qtitle", tabindex: "-1", text: "Ερώτηση " + (run.idx + 1) + " από " + run.items.length }));
     wrap.appendChild(h("p", { class: "prompt", id: "prompt", text: q.prompt }));
 
-    var checkBtn = h("button", { type: "button", class: "primary", id: "check", text: "Έλεγχος", disabled: true, onclick: function () {
-      if (run.selected === null) return;
-      submitAnswer(run, item.order[run.selected]); render("#next");
-    } });
+    var main = h("button", { type: "button", class: "btn primary block", id: "main", disabled: true });
     var group = h("fieldset", { "aria-labelledby": "prompt" });
     item.order.forEach(function (origIdx, pos) {
-      var isChosen = answered ? rec.c === origIdx : run.selected === pos;
-      var input = h("input", { type: "radio", name: "answer", value: String(pos), checked: isChosen, disabled: answered, onchange: function () {
-        run.selected = pos; checkBtn.disabled = false;
+      var chosen = rec ? rec.c === origIdx : run.selected === pos;
+      var cls = "opt" + (chosen && !revealed ? " selected" : "") + (revealed ? " locked" : "");
+      var note = null;
+      if (revealed) {
+        if (origIdx === q.correct) { cls += " right"; note = "Σωστή ✓"; }
+        else if (chosen) { cls += " wrong"; note = "Η απάντησή σου"; }
+      }
+      var input = h("input", { type: "radio", name: "answer", value: String(pos), checked: chosen, disabled: revealed, onchange: function () {
+        run.selected = pos; main.disabled = false;
         Array.prototype.forEach.call(group.querySelectorAll(".opt"), function (l, i) { l.classList.toggle("selected", i === pos); });
       } });
-      group.appendChild(h("label", { class: "opt" + (isChosen ? " selected" : "") + (answered ? " locked" : "") }, input, h("span", { text: q.options[origIdx] })));
+      group.appendChild(h("label", { class: cls }, input, h("span", { class: "let", "aria-hidden": "true", text: LETTERS[pos] }), h("span", { text: q.options[origIdx] }),
+        note ? h("span", { class: "note", text: note }) : null));
     });
     wrap.appendChild(group);
-    if (!answered) {
-      checkBtn.disabled = run.selected === null;
-      wrap.appendChild(checkBtn);
+
+    var last = run.idx === run.items.length - 1;
+    if (isPractice && !rec) {
+      main.textContent = "Έλεγχος"; main.disabled = run.selected === null;
+      main.addEventListener("click", function () { if (run.selected === null) return; submitAnswer(run, item.order[run.selected]); render("#main"); });
+      wrap.appendChild(main);
+    } else if (isPractice) {
+      wrap.appendChild(h("div", { class: "feedback " + (rec.ok ? "good" : "bad"), role: "status" },
+        h("div", { class: "verdict", text: rec.ok ? "Μπράβο!" : "Όχι ακριβώς." }),
+        rec.ok ? null : h("div", null, "Η σωστή απάντηση είναι: ", h("strong", { text: q.options[q.correct] })),
+        h("div", { text: q.explanation })));
+      main.textContent = last ? "Δες το αποτέλεσμα" : "Επόμενη ερώτηση"; main.disabled = false;
+      main.addEventListener("click", function () { finishStep(run); });
+      wrap.appendChild(main);
     } else {
-      var body = [h("div", { class: "verdict", text: rec.ok ? "Σωστά!" : "Όχι ακριβώς." })];
-      if (!rec.ok) body.push(h("div", null, "Η σωστή απάντηση είναι: ", h("strong", { text: q.options[q.correct] })));
-      body.push(h("div", { text: q.explanation }));
-      wrap.appendChild(h("div", { class: "feedback", role: "status" }, body));
-      var last = run.idx === run.items.length - 1;
-      wrap.appendChild(h("button", { type: "button", class: "primary", id: "next", text: last ? "Δες το αποτέλεσμα" : "Επόμενη ερώτηση", onclick: function () {
-        advanceRun(run);
-        if (isFinished(run) && !saveRun(run)) setFlash("error", "Το αποτέλεσμα δεν αποθηκεύτηκε ακόμη.");
-        render("#qtitle, #rtitle");
-      } }));
+      main.textContent = last ? "Τέλος τεστ" : "Επόμενη ερώτηση"; main.disabled = run.selected === null;
+      main.addEventListener("click", function () { if (run.selected === null) return; submitAnswer(run, item.order[run.selected]); finishStep(run); });
+      wrap.appendChild(main);
     }
-    wrap.appendChild(h("button", { type: "button", text: "Διακοπή τεστ (δεν θα αποθηκευτεί)", onclick: function () { ui.run = null; render(); } }));
     return wrap;
   }
+  function finishStep(run) {
+    advanceRun(run);
+    if (isFinished(run) && !saveRun(run)) setFlash("error", "Το αποτέλεσμα δεν αποθηκεύτηκε ακόμη.");
+    render(isFinished(run) ? "#rtitle" : "#qtitle");
+  }
 
+  // ---------------- Αποτέλεσμα ----------------
   function resultView(profile, run) {
-    var res = runResult(run);
-    var wrap = h("section", null, h("h2", { id: "rtitle", tabindex: "-1", text: "Αποτέλεσμα" }));
-    wrap.appendChild(h("div", { class: "metrics" },
-      h("div", { class: "metric" }, h("div", { class: "k", text: "Σκορ" }), h("div", { class: "v", text: res.score + " από " + res.total })),
-      h("div", { class: "metric" }, h("div", { class: "k", text: "Ποσοστό επιτυχίας" }), h("div", { class: "v", text: res.percent + "%" }))));
-    wrap.appendChild(h("p", { text: "Η τακτική εξάσκηση βοηθά να θυμόμαστε καλύτερα." }));
+    var res = runResult(run), isPractice = run.mode === "practice", pct = percentOf(res.score, res.total), topic = run.topic;
+    var wrap = h("section", null, h("h2", { id: "rtitle", tabindex: "-1", text: isPractice ? "Τέλος εξάσκησης!" : "Τέλος τεστ!" }),
+      h("p", { class: "muted", text: topic.title }),
+      h("div", { class: "bigscore", text: res.score + " από " + res.total }),
+      h("div", { class: "meter", role: "img", "aria-label": res.score + " σωστές απαντήσεις από " + res.total },
+        res.review.map(function (r) { return h("span", { class: r.a && r.a.ok ? "on" : "" }); })));
+    var msg;
+    if (isPractice) msg = pct >= 80 ? "Μπράβο! Μπορείς να δοκιμάσεις το Τεστάκι." : "Καλή δουλειά! Μπορείς να ξανακάνεις την Εξάσκηση ή να δοκιμάσεις το Τεστάκι.";
+    else msg = pct >= 80 ? "Μπράβο! Τα πήγες πολύ καλά." : pct >= 50 ? "Καλή προσπάθεια! Με λίγη ακόμα εξάσκηση θα τα πας ακόμα καλύτερα." : "Ευχαριστούμε που προσπάθησες! Ξαναδές την Εξάσκηση και δοκίμασε πάλι όποτε θέλεις.";
+    wrap.appendChild(h("p", { style: "font-size:1.2rem;font-weight:700", text: msg }));
+
     if (!run.savedOk) {
       wrap.appendChild(h("div", { class: "banner error", role: "alert", text: "Το αποτέλεσμα δεν αποθηκεύτηκε ακόμη." }));
-      wrap.appendChild(h("button", { type: "button", text: "Δοκίμασε ξανά την αποθήκευση", onclick: function () {
+      wrap.appendChild(h("button", { type: "button", class: "btn block", text: "Δοκίμασε ξανά την αποθήκευση", onclick: function () {
         if (!saveRun(run)) setFlash("error", "Η αποθήκευση δεν είναι διαθέσιμη σε αυτόν τον browser."); render();
       } }));
-    } else wrap.appendChild(h("p", { class: "muted", text: "Το αποτέλεσμα αποθηκεύτηκε." }));
-
-    if (res.bySection.length > 1) {
-      wrap.appendChild(h("h3", { text: "Επίδοση ανά ενότητα" }));
-      wrap.appendChild(h("div", { class: "tablewrap" }, h("table", null,
-        h("thead", null, h("tr", null, ["Ενότητα", "Σωστές", "Σύνολο", "Ποσοστό"].map(function (t) { return h("th", { scope: "col", text: t }); }))),
-        h("tbody", null, res.bySection.map(function (s) {
-          return h("tr", null, h("td", { text: s.title }), h("td", { text: s.correct }), h("td", { text: s.total }), h("td", { text: percentOf(s.correct, s.total) + "%" }));
-        })))));
     }
-    var det = h("details", null, h("summary", { text: "Ανασκόπηση απαντήσεων" }),
-      h("div", { class: "tablewrap" }, h("table", null,
-        h("thead", null, h("tr", null, ["Ερώτηση", "Η απάντησή σου", "Σωστή απάντηση", "Αποτέλεσμα"].map(function (t) { return h("th", { scope: "col", text: t }); }))),
-        h("tbody", null, res.review.map(function (r) {
-          return h("tr", null, h("td", { text: r.q.prompt }), h("td", { text: r.q.options[r.a.c] }), h("td", { text: r.q.options[r.q.correct] }),
-            h("td", { text: r.a.ok ? "Σωστή" : "Να την ξαναδούμε" }));
-        })))));
-    wrap.appendChild(det);
 
-    wrap.appendChild(h("button", { type: "button", class: "primary", text: "Νέο τεστ με τις ίδιες ρυθμίσεις", onclick: function () {
-      var s = run.settings, nr = startRun(profile, s.section, s.count);
-      if (!nr) { setFlash("error", "Δεν ήταν δυνατή η έναρξη νέου τεστ."); render(); return; }
-      ui.run = nr; render("#qtitle");
-    } }));
-    if (res.wrong.length) {
-      wrap.appendChild(h("button", { type: "button", text: "Επανάληψη των ερωτήσεων για εξάσκηση (" + res.wrong.length + ")", onclick: function () {
-        ui.run = makeRun(profile, run.section, shuffle(res.wrong), run.settings); render("#qtitle");
-      } }));
+    if (!isPractice) {
+      wrap.appendChild(h("details", null, h("summary", { text: "Δες τις απαντήσεις" }),
+        h("ol", { class: "review" }, res.review.map(function (r) {
+          var ok = r.a && r.a.ok;
+          return h("li", null, h("div", { class: "q", text: r.q.prompt }),
+            h("div", null, "Η απάντησή σου: " + (r.a ? r.q.options[r.a.c] : "—") + (ok ? " ✓" : "")),
+            ok ? null : h("div", null, "Σωστή απάντηση: ", h("strong", { text: r.q.options[r.q.correct] })),
+            ok ? null : h("div", { class: "muted", text: r.q.explanation }));
+        }))));
     }
-    wrap.appendChild(h("button", { type: "button", text: "Αρχική οθόνη", onclick: function () { ui.run = null; render(); } }));
+
+    if (isPractice) {
+      wrap.appendChild(h("button", { type: "button", class: "btn primary block", id: "totest", text: "Δοκίμασε το Τεστάκι", onclick: function () { ui.run = startRun(profile, topic, "test"); render("#qtitle"); } }));
+      if (res.wrong.length) wrap.appendChild(h("button", { type: "button", class: "btn block", id: "retrywrong", text: "Ξανά οι ερωτήσεις που θέλουν εξάσκηση (" + res.wrong.length + ")",
+        onclick: function () { ui.run = makeRun(profile, topic, "practice", res.wrong, { retry: true }); render("#qtitle"); } }));
+      wrap.appendChild(h("button", { type: "button", class: "btn block", id: "again", text: "Εξάσκηση ξανά από την αρχή", onclick: function () { ui.run = startRun(profile, topic, "practice"); render("#qtitle"); } }));
+    } else {
+      wrap.appendChild(h("button", { type: "button", class: "btn " + (res.wrong.length ? "primary " : "") + "block", id: "topractice", text: "Πήγαινε στην Εξάσκηση", onclick: function () { ui.run = startRun(profile, topic, "practice"); render("#qtitle"); } }));
+      wrap.appendChild(h("button", { type: "button", class: "btn block", id: "again", text: "Ξανά το Τεστάκι", onclick: function () { ui.run = startRun(profile, topic, "test"); render("#qtitle"); } }));
+    }
+    wrap.appendChild(h("button", { type: "button", class: "btn block", id: "home", text: "Αρχική οθόνη", onclick: function () { ui.run = null; render(); } }));
     return wrap;
   }
 
@@ -541,78 +724,142 @@ th { background:var(--soft); font-weight:600; }
       try { raw = JSON.parse(String(reader.result)); } catch (e) { setFlash("error", "Το αρχείο δεν είναι έγκυρο αρχείο προόδου."); render(); return; }
       var r = mergeImport(raw);
       if (r.error) setFlash("error", r.error);
-      else setFlash("ok", "Η επαναφορά ολοκληρώθηκε: " + r.profiles + " νέα προφίλ και " + r.tests + " νέα τεστ.");
+      else setFlash("ok", "Η επαναφορά ολοκληρώθηκε: " + r.profiles + " νέα προφίλ και " + r.runs + " νέες καταχωρίσεις.");
       render();
     };
     reader.onerror = function () { setFlash("error", "Το αρχείο δεν μπόρεσε να διαβαστεί."); render(); };
     reader.readAsText(file);
   }
+  function th(list) { return h("thead", null, h("tr", null, list.map(function (t) { return h("th", { scope: "col", text: t }); }))); }
 
   function parentView(profile) {
-    var tests = testsOf(profile.id);
+    var all = runsOf(profile.id), tests = runsOf(profile.id, "test"), practices = runsOf(profile.id, "practice");
     var wrap = h("section", null, h("h2", { text: "Πρόοδος: " + profile.name }));
-    if (!tests.length) {
-      wrap.appendChild(h("p", { text: "Δεν υπάρχουν ακόμη ολοκληρωμένα τεστ. Όταν ολοκληρωθεί το πρώτο τεστ, η πρόοδος θα εμφανιστεί εδώ." }));
+    if (!all.length) {
+      wrap.appendChild(h("p", { text: "Δεν υπάρχουν ακόμη ολοκληρωμένες εξασκήσεις ή τεστάκια. Όταν ολοκληρωθεί το πρώτο, η πρόοδος θα εμφανιστεί εδώ." }));
     } else {
+      var avg = averagePercent(tests);
       wrap.appendChild(h("div", { class: "metrics" },
-        h("div", { class: "metric" }, h("div", { class: "k", text: "Ολοκληρωμένα τεστ" }), h("div", { class: "v", text: tests.length })),
-        h("div", { class: "metric" }, h("div", { class: "k", text: "Μέσο ποσοστό επιτυχίας" }), h("div", { class: "v", text: averagePercent(tests) + "%" })),
-        h("div", { class: "metric" }, h("div", { class: "k", text: "Τελευταίο τεστ" }), h("div", { class: "v", style: "font-size:1.3rem", text: fmtDay(tests[0].completedAt) }))));
+        h("div", { class: "metric" }, h("div", { class: "k", text: "Εξασκήσεις" }), h("div", { class: "v", text: practices.length })),
+        h("div", { class: "metric" }, h("div", { class: "k", text: "Τεστάκια" }), h("div", { class: "v", text: tests.length })),
+        h("div", { class: "metric" }, h("div", { class: "k", text: "Μέσο ποσοστό στα τεστάκια" }), h("div", { class: "v", text: avg === null ? "—" : avg + "%" })),
+        h("div", { class: "metric" }, h("div", { class: "k", text: "Τελευταία δραστηριότητα" }), h("div", { class: "v", style: "font-size:1.3rem", text: fmtDay(all[0].completedAt) }))));
 
-      var recent = tests.slice(0, 10).reverse();
-      wrap.appendChild(h("h3", { text: "Πρόσφατες επιδόσεις" }));
-      wrap.appendChild(h("p", { class: "muted", text: "Τελευταία " + recent.length + " τεστ, από το παλαιότερο στο νεότερο (ποσοστό επιτυχίας)." }));
-      wrap.appendChild(h("div", { class: "chart", role: "img", "aria-label": "Ποσοστά επιτυχίας: " + recent.map(function (t) { return percentOf(t.score, t.n) + "%"; }).join(", ") },
-        recent.map(function (t) { var p = percentOf(t.score, t.n); return h("div", { class: "col" }, h("span", { text: p + "%" }), h("div", { style: "height:" + Math.max(p, 1) + "%" })); })));
-      wrap.appendChild(h("div", { class: "chartlabels" }, recent.map(function (t, i) { return h("span", { text: String(i + 1) }); })));
+      if (tests.length) {
+        var recent = tests.slice(0, 10).reverse();
+        wrap.appendChild(h("h3", { text: "Πρόσφατα τεστάκια" }));
+        wrap.appendChild(h("p", { class: "muted", text: "Τελευταία " + recent.length + ", από το παλαιότερο στο νεότερο (ποσοστό επιτυχίας)." }));
+        wrap.appendChild(h("div", { class: "chart", role: "img", "aria-label": "Ποσοστά επιτυχίας: " + recent.map(function (t) { return percentOf(t.score, t.n) + "%"; }).join(", ") },
+          recent.map(function (t) { var p = percentOf(t.score, t.n); return h("div", { class: "col" }, h("span", { text: p + "%" }), h("div", { style: "height:" + Math.max(p, 1) + "%" })); })));
+        wrap.appendChild(h("div", { class: "chartlabels" }, recent.map(function (t, i) { return h("span", { text: String(i + 1) }); })));
+      }
 
-      wrap.appendChild(h("h3", { text: "Επίδοση ανά ενότητα" }));
-      var perf = sectionPerformance(profile.id);
-      wrap.appendChild(h("div", { class: "tablewrap" }, h("table", null,
-        h("thead", null, h("tr", null, ["Ενότητα", "Σύνολο", "Σωστές", "Ποσοστό"].map(function (t) { return h("th", { scope: "col", text: t }); }))),
-        h("tbody", null, SECTIONS.filter(function (s) { return questionsFor(profile.grade, s.code).length > 0 || perf[s.code]; }).map(function (s) {
-          var p = perf[s.code];
-          if (!p) return h("tr", null, h("td", { text: s.title }), h("td", { colspan: "3", class: "muted", text: "Δεν έχει δοκιμαστεί ακόμα" }));
-          var pct = percentOf(p.correct, p.answered);
-          return h("tr", null, h("td", { text: s.title }), h("td", { text: p.answered }), h("td", { text: p.correct }),
-            h("td", null, h("span", { class: "bar", "aria-hidden": "true" }, h("i", { style: "width:" + pct + "%" })), pct + "%"));
+      wrap.appendChild(h("h3", { text: "Τεστάκια ανά ενότητα" }));
+      var stats = {};
+      tests.forEach(function (r) {
+        var s = stats[r.topic] || (stats[r.topic] = { count: 0, sum: 0, last: null, lastAt: "" });
+        s.count++; s.sum += 100 * r.score / r.n;
+        if (r.completedAt >= s.lastAt) { s.lastAt = r.completedAt; s.last = percentOf(r.score, r.n); }
+      });
+      var titles = bank.topics.map(function (t) { return t.title; });
+      Object.keys(stats).forEach(function (t) { if (titles.indexOf(t) < 0) titles.push(t); });
+      wrap.appendChild(h("div", { class: "tablewrap" }, h("table", null, th(["Ενότητα", "Τεστάκια", "Μέσο", "Τελευταίο"]),
+        h("tbody", null, titles.map(function (t) {
+          var s = stats[t];
+          if (!s) return h("tr", null, h("td", { text: t }), h("td", { colspan: "3", class: "muted", text: "Δεν έχει δοκιμαστεί ακόμα" }));
+          var m = Math.floor(s.sum / s.count + 0.5);
+          return h("tr", null, h("td", { text: t }), h("td", { text: s.count }),
+            h("td", null, h("span", { class: "bar", "aria-hidden": "true" }, h("i", { style: "width:" + m + "%" })), m + "%"), h("td", { text: s.last + "%" }));
         })))));
 
-      wrap.appendChild(h("h3", { text: "Ιστορικό τεστ" }));
-      wrap.appendChild(h("div", { class: "tablewrap" }, h("table", null,
-        h("thead", null, h("tr", null, ["Ημερομηνία", "Ενότητα", "Σκορ", "Ποσοστό"].map(function (t) { return h("th", { scope: "col", text: t }); }))),
-        h("tbody", null, tests.map(function (t) {
-          return h("tr", null, h("td", { text: fmtDate(t.completedAt) }), h("td", { text: t.section ? SECTION_BY_CODE[t.section].title : "Όλες οι ενότητες" }),
-            h("td", { text: t.score + "/" + t.n }), h("td", { text: percentOf(t.score, t.n) + "%" }));
+      wrap.appendChild(h("h3", { text: "Ιστορικό" }));
+      wrap.appendChild(h("div", { class: "tablewrap" }, h("table", null, th(["Ημερομηνία", "Ενότητα", "Είδος", "Σκορ"]),
+        h("tbody", null, all.map(function (r) {
+          return h("tr", null, h("td", { text: fmtDate(r.completedAt) }),
+            h("td", null, r.topic, r.set ? h("div", { class: "muted", text: r.set }) : null),
+            h("td", { text: r.mode === "test" ? "Τεστάκι" : "Εξάσκηση" }), h("td", { text: r.score + "/" + r.n + " (" + percentOf(r.score, r.n) + "%)" }));
         })))));
     }
 
     var fileInput = h("input", { type: "file", id: "importfile", accept: "application/json,.json", class: "sr", tabindex: "-1", onchange: function (e) { importFile(e.target.files[0]); } });
     wrap.appendChild(h("h3", { text: "Αντίγραφο ασφαλείας" }));
     wrap.appendChild(h("p", { class: "muted", text: "Η πρόοδος υπάρχει μόνο σε αυτόν τον browser και χάνεται αν καθαριστούν τα δεδομένα περιήγησης. Κατέβασε ένα αρχείο ως αντίγραφο ή για να μεταφέρεις την πρόοδο σε άλλη συσκευή. Περιέχει τα ψευδώνυμα και τα αποτελέσματα όλων των προφίλ, οπότε φύλαξέ το προσεκτικά." }));
-    wrap.appendChild(h("button", { type: "button", text: "Λήψη αρχείου προόδου", onclick: downloadBackup }));
-    wrap.appendChild(h("button", { type: "button", text: "Επαναφορά από αρχείο", onclick: function () { fileInput.click(); } }));
+    wrap.appendChild(h("button", { type: "button", class: "btn block", text: "Λήψη αρχείου προόδου", onclick: downloadBackup }));
+    wrap.appendChild(h("button", { type: "button", class: "btn block", text: "Επαναφορά από αρχείο", onclick: function () { fileInput.click(); } }));
     wrap.appendChild(fileInput);
 
     var confirm = h("input", { type: "checkbox", id: "confirmdel", checked: ui.confirmDelete, onchange: function (e) { ui.confirmDelete = e.target.checked; } });
     wrap.appendChild(h("details", null, h("summary", { text: "Διαχείριση προφίλ" }),
       h("p", { text: "Η διαγραφή αφαιρεί το προφίλ και όλα τα αποτελέσματά του και δεν μπορεί να αναιρεθεί." }),
       h("div", { class: "check-row" }, confirm, h("label", { for: "confirmdel", text: "Επιβεβαιώνω ότι θέλω να διαγραφεί το προφίλ" })),
-      h("button", { type: "button", id: "deletebtn", text: "Διαγραφή προφίλ", onclick: function () {
+      h("button", { type: "button", class: "btn block", id: "deletebtn", text: "Διαγραφή προφίλ", onclick: function () {
         if (!ui.confirmDelete) { setFlash("error", "Τσέκαρε πρώτα το πλαίσιο επιβεβαίωσης."); render(); return; }
         if (removeProfile(profile.id)) { ui.confirmDelete = false; ui.profileId = null; ui.view = "student"; setFlash("ok", "Το προφίλ και τα αποτελέσματά του διαγράφηκαν."); }
         else setFlash("error", "Η αποθήκευση δεν είναι διαθέσιμη σε αυτόν τον browser.");
         render();
       } })));
+    wrap.appendChild(h("p", { class: "muted" }, "Για όποιον διαχειρίζεται τη σελίδα: ",
+      h("a", { href: "?check", text: "έλεγχος των ερωτήσεων" }), "."));
     return wrap;
   }
 
+  // ---------------- Έλεγχος ερωτήσεων (?check) και σφάλματα ----------------
+  function renderBankError(parsed) {
+    var root = h("div", null, header(null),
+      h("div", { class: "banner error", role: "alert" },
+        h("strong", { text: "Κάτι δεν πάει καλά με τις ερωτήσεις." }),
+        h("p", { style: "margin:.4rem 0 0", text: "Ενημέρωσε κάποιον μεγάλο, για να διορθωθεί το αρχείο questions.js." })),
+      h("section", { class: "panel" }, h("h2", { text: "Για όποιον διαχειρίζεται τη σελίδα" }),
+        h("p", { text: "Βρέθηκαν τα παρακάτω προβλήματα στο αρχείο questions.js:" }),
+        h("ul", null, parsed.errors.slice(0, 40).map(function (e) { return h("li", { text: e }); })),
+        parsed.errors.length > 40 ? h("p", { class: "muted", text: "…και άλλα " + (parsed.errors.length - 40) + "." }) : null));
+    app.replaceChildren(root);
+  }
+  function renderMissing() {
+    app.replaceChildren(h("div", null, header(null), h("div", { class: "banner error", role: "alert" },
+      h("strong", { text: "Δεν φορτώθηκαν οι ερωτήσεις." }),
+      h("p", { style: "margin:.4rem 0 0", text: "Το αρχείο questions.js λείπει, δεν βρίσκεται στον ίδιο φάκελο με το index.html ή έχει σφάλμα στην πρώτη ή στην τελευταία του γραμμή." }))));
+  }
+  function renderCheck(parsed) {
+    var root = h("div", null, header(h("a", { class: "btn small", href: location.pathname, style: "text-decoration:none;display:inline-flex;align-items:center", text: "Στην εφαρμογή" })),
+      h("h2", { text: "Έλεγχος ερωτήσεων" }));
+    if (parsed.errors.length) {
+      root.appendChild(h("div", { class: "banner error", role: "alert" }, h("strong", { text: "Βρέθηκαν " + parsed.errors.length + " προβλήματα. Η εφαρμογή δεν θα ανοίξει μέχρι να διορθωθούν:" }),
+        h("ul", null, parsed.errors.map(function (e) { return h("li", { text: e }); }))));
+    } else {
+      var total = parsed.topics.reduce(function (a, t) { return a + t.practiceQs.length + (t.hasTest ? t.test.length : 0); }, 0);
+      root.appendChild(h("div", { class: "banner" }, h("strong", { text: "Όλα εντάξει: " + parsed.topics.length + " ενότητες, " + total + " ερωτήσεις." }),
+        parsed.grade || parsed.set ? h("div", { class: "muted", text: [parsed.grade, parsed.set].filter(Boolean).join(" · ") }) : null));
+    }
+    if (parsed.warnings.length) root.appendChild(h("div", { class: "banner" }, h("strong", { text: "Προσοχή (δεν εμποδίζουν τη λειτουργία):" }),
+      h("ul", null, parsed.warnings.map(function (w) { return h("li", { text: w }); }))));
+    parsed.topics.forEach(function (t) {
+      function list(qs) {
+        return h("ol", null, qs.map(function (x) {
+          return h("li", null, x.prompt, h("ul", null, x.options.map(function (o, i) { return h("li", null, i === x.correct ? h("strong", { text: o + " ✓" }) : o); })),
+            h("div", { class: "muted", text: x.explanation }));
+        }));
+      }
+      var sum = t.title + " — Εξάσκηση: " + t.practice.length + (t.hasTest ? ", Τεστάκι: " + t.test.length : ", Τεστάκι: οι ίδιες ερωτήσεις");
+      root.appendChild(h("details", null, h("summary", { text: sum }), h("h3", { text: "Εξάσκηση" }), list(t.practice),
+        t.hasTest ? [h("h3", { text: "Τεστάκι" }), list(t.test)] : null));
+    });
+    app.replaceChildren(root);
+  }
+
   // ------------------------------------------------------------------
-  // Εκκίνηση (και προαιρετική έκθεση για αυτόματο έλεγχο: window.__mathapp)
+  // Εκκίνηση (και έκθεση για αυτόματο έλεγχο: window.__mathapp)
   // ------------------------------------------------------------------
   loadStore();
-  render();
-  window.__mathapp = { sanitize: sanitize, nameKey: nameKey, percentOf: percentOf, questions: QUESTIONS, getRun: function () { return ui.run; } };
+  var CHECK = /[?&]check(?:[=&]|$)/.test(location.search);
+  if (typeof window.QUESTIONS_TEXT !== "string") renderMissing();
+  else {
+    bank = parseBank(window.QUESTIONS_TEXT);
+    if (CHECK) renderCheck(bank);
+    else if (bank.errors.length) renderBankError(bank);
+    else render();
+  }
+  window.__mathapp = { parseBank: parseBank, sanitize: sanitize, nameKey: nameKey, percentOf: percentOf, getRun: function () { return ui.run; }, getBank: function () { return bank; } };
 })();
 </script>
 </body>
